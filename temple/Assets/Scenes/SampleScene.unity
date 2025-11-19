@@ -119,6 +119,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &15293442
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 15293443}
+  m_Layer: 0
+  m_Name: ------ bedroom 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &15293443
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 15293442}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.98, y: 0, z: -6.67}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1148255062}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &52585044
 GameObject:
   m_ObjectHideFlags: 0
@@ -151,6 +182,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1592835844}
+  - {fileID: 509133351}
   m_Father: {fileID: 2146473870}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -216,11 +248,130 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 1
+--- !u!1 &76844055
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 76844056}
+  - component: {fileID: 76844057}
+  m_Layer: 0
+  m_Name: Yard
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &76844056
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 76844055}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -15.79, y: 1.2, z: -8.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 551552522}
+  m_Father: {fileID: 2146473854}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &76844057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 76844055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ce32409591154080a3a1f8667a2568d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NavigationNode
+  nodeName: Room
+  nodeDescription: A room in the haunted house
+  atmosphereDescription: The air feels cold and still...
+  connections:
+  - destinationNode: {fileID: 2146473877}
+    label: The Yard
+    intermediateNodes:
+    - {fileID: 551552523}
+  cameraLookRotation: {x: 0, y: 0, z: 0}
+  hasPuzzle: 0
+  puzzleComponent: {fileID: 0}
+  hasKey: 0
+  keyNumber: 0
+  isLocked: 0
+  keysRequired: 0
+  isIntermediateNode: 0
+  doorsToOpen: []
+--- !u!1 &248951159
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 248951160}
+  - component: {fileID: 248951161}
+  m_Layer: 0
+  m_Name: imNode (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &248951160
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 248951159}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3.32, y: 0, z: 3.9499998}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1148255062}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &248951161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 248951159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ce32409591154080a3a1f8667a2568d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NavigationNode
+  nodeName: Room
+  nodeDescription: A room in the haunted house
+  atmosphereDescription: The air feels cold and still...
+  connections: []
+  cameraLookRotation: {x: 0, y: 0, z: 0}
+  hasPuzzle: 0
+  puzzleComponent: {fileID: 0}
+  hasKey: 0
+  keyNumber: 0
+  isLocked: 0
+  keysRequired: 0
+  isIntermediateNode: 1
+  doorsToOpen: []
 --- !u!1 &292954721
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,6 +420,7 @@ MonoBehaviour:
   nodeDescription: A room in the haunted house
   atmosphereDescription: The air feels cold and still...
   connections: []
+  cameraLookRotation: {x: 0, y: 0, z: 0}
   hasPuzzle: 0
   puzzleComponent: {fileID: 0}
   hasKey: 0
@@ -276,6 +428,63 @@ MonoBehaviour:
   isLocked: 0
   keysRequired: 0
   isIntermediateNode: 0
+  doorsToOpen: []
+--- !u!1 &317837733
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 317837734}
+  - component: {fileID: 317837735}
+  m_Layer: 0
+  m_Name: imNode (8)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &317837734
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 317837733}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 5.88, y: -3.72, z: 0.19000006}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1148255062}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &317837735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 317837733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ce32409591154080a3a1f8667a2568d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NavigationNode
+  nodeName: Room
+  nodeDescription: A room in the haunted house
+  atmosphereDescription: The air feels cold and still...
+  connections: []
+  cameraLookRotation: {x: 0, y: 0, z: 0}
+  hasPuzzle: 0
+  puzzleComponent: {fileID: 0}
+  hasKey: 0
+  keyNumber: 0
+  isLocked: 0
+  keysRequired: 0
+  isIntermediateNode: 1
   doorsToOpen: []
 --- !u!1 &330585543
 GameObject:
@@ -414,6 +623,94 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!1 &351095223
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 351095224}
+  - component: {fileID: 351095225}
+  m_Layer: 0
+  m_Name: imNode (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &351095224
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 351095223}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.45000005, y: 0, z: 3.1999998}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1148255062}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &351095225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 351095223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ce32409591154080a3a1f8667a2568d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NavigationNode
+  nodeName: Room
+  nodeDescription: A room in the haunted house
+  atmosphereDescription: The air feels cold and still...
+  connections: []
+  cameraLookRotation: {x: 0, y: 0, z: 0}
+  hasPuzzle: 0
+  puzzleComponent: {fileID: 0}
+  hasKey: 0
+  keyNumber: 0
+  isLocked: 0
+  keysRequired: 0
+  isIntermediateNode: 1
+  doorsToOpen: []
+--- !u!1 &375113836
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 375113837}
+  m_Layer: 0
+  m_Name: ------ basement
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &375113837
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 375113836}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.98, y: 0, z: -6.67}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1148255062}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &402443380
 GameObject:
   m_ObjectHideFlags: 0
@@ -462,6 +759,7 @@ MonoBehaviour:
   nodeDescription: A room in the haunted house
   atmosphereDescription: The air feels cold and still...
   connections: []
+  cameraLookRotation: {x: 0, y: 0, z: 0}
   hasPuzzle: 0
   puzzleComponent: {fileID: 0}
   hasKey: 0
@@ -645,6 +943,7 @@ MonoBehaviour:
   nodeDescription: A room in the haunted house
   atmosphereDescription: The air feels cold and still...
   connections: []
+  cameraLookRotation: {x: 0, y: 0, z: 0}
   hasPuzzle: 0
   puzzleComponent: {fileID: 0}
   hasKey: 0
@@ -750,6 +1049,99 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!224 &509133351 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2742179914026223687, guid: 48e2ac9cdd35c464982897bd26323444, type: 3}
+  m_PrefabInstance: {fileID: 5982625242881272157}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &519508830
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 519508831}
+  m_Layer: 0
+  m_Name: ------ kitchen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &519508831
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519508830}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2146473876}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &551552521
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 551552522}
+  - component: {fileID: 551552523}
+  m_Layer: 0
+  m_Name: imNode (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &551552522
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 551552521}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 5.66, y: 1, z: 1.11}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 76844056}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &551552523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 551552521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ce32409591154080a3a1f8667a2568d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NavigationNode
+  nodeName: Room
+  nodeDescription: A room in the haunted house
+  atmosphereDescription: The air feels cold and still...
+  connections: []
+  cameraLookRotation: {x: 0, y: 0, z: 0}
+  hasPuzzle: 0
+  puzzleComponent: {fileID: 0}
+  hasKey: 0
+  keyNumber: 0
+  isLocked: 0
+  keysRequired: 0
+  isIntermediateNode: 1
+  doorsToOpen: []
 --- !u!1 &644887563
 GameObject:
   m_ObjectHideFlags: 0
@@ -861,6 +1253,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &692117530
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 692117531}
+  m_Layer: 0
+  m_Name: ------ bathroom
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &692117531
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692117530}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.98, y: 0, z: -6.67}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1148255062}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &775270250
 GameObject:
   m_ObjectHideFlags: 0
@@ -887,7 +1310,7 @@ Transform:
   m_GameObject: {fileID: 775270250}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.37, y: 2.3, z: 4.69}
+  m_LocalPosition: {x: -7.37, y: 2.3, z: 4.6900005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -909,6 +1332,7 @@ MonoBehaviour:
   nodeDescription: A room in the haunted house
   atmosphereDescription: The air feels cold and still...
   connections: []
+  cameraLookRotation: {x: 0, y: 0, z: 0}
   hasPuzzle: 0
   puzzleComponent: {fileID: 0}
   hasKey: 0
@@ -965,6 +1389,7 @@ MonoBehaviour:
   nodeDescription: A room in the haunted house
   atmosphereDescription: The air feels cold and still...
   connections: []
+  cameraLookRotation: {x: 0, y: 0, z: 0}
   hasPuzzle: 0
   puzzleComponent: {fileID: 0}
   hasKey: 0
@@ -972,6 +1397,63 @@ MonoBehaviour:
   isLocked: 0
   keysRequired: 0
   isIntermediateNode: 0
+  doorsToOpen: []
+--- !u!1 &939977111
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 939977112}
+  - component: {fileID: 939977113}
+  m_Layer: 0
+  m_Name: imNode (7)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &939977112
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 939977111}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.0900002, y: 0, z: -0.03999996}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1148255062}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &939977113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 939977111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ce32409591154080a3a1f8667a2568d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NavigationNode
+  nodeName: Room
+  nodeDescription: A room in the haunted house
+  atmosphereDescription: The air feels cold and still...
+  connections: []
+  cameraLookRotation: {x: 0, y: 0, z: 0}
+  hasPuzzle: 0
+  puzzleComponent: {fileID: 0}
+  hasKey: 0
+  keyNumber: 0
+  isLocked: 0
+  keysRequired: 0
+  isIntermediateNode: 1
   doorsToOpen: []
 --- !u!1 &946400830
 GameObject:
@@ -1220,6 +1702,7 @@ MonoBehaviour:
   nodeDescription: A room in the haunted house
   atmosphereDescription: The air feels cold and still...
   connections: []
+  cameraLookRotation: {x: 0, y: 0, z: 0}
   hasPuzzle: 0
   puzzleComponent: {fileID: 0}
   hasKey: 0
@@ -1325,6 +1808,117 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1148255061
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1148255062}
+  - component: {fileID: 1148255063}
+  m_Layer: 0
+  m_Name: '[Hallway]'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1148255062
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1148255061}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.25, y: 2.3, z: -1.23}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 15293443}
+  - {fileID: 351095224}
+  - {fileID: 248951160}
+  - {fileID: 692117531}
+  - {fileID: 1548834512}
+  - {fileID: 375113837}
+  - {fileID: 939977112}
+  - {fileID: 317837734}
+  m_Father: {fileID: 2146473854}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1148255063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1148255061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ce32409591154080a3a1f8667a2568d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nodeName: Living Room
+  nodeDescription: A room in the haunted house
+  atmosphereDescription: The air feels cold and still...
+  connections:
+  - destinationNode: {fileID: 900093510}
+    label: Bedroom 1
+    intermediateNodes:
+    - {fileID: 351095225}
+    - {fileID: 248951161}
+  - destinationNode: {fileID: 455820368}
+    label: Bathroom
+    intermediateNodes:
+    - {fileID: 351095225}
+    - {fileID: 1548834513}
+  - destinationNode: {fileID: 292954723}
+    label: Basement
+    intermediateNodes:
+    - {fileID: 939977113}
+    - {fileID: 317837735}
+  cameraLookRotation: {x: 0, y: 0, z: 0}
+  hasPuzzle: 0
+  puzzleComponent: {fileID: 0}
+  hasKey: 0
+  keyNumber: 0
+  isLocked: 0
+  keysRequired: 0
+  isIntermediateNode: 0
+  doorsToOpen: []
+--- !u!1 &1250899140
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1250899141}
+  m_Layer: 0
+  m_Name: ------ Bedroom 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1250899141
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1250899140}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2146473876}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1322064300
 GameObject:
   m_ObjectHideFlags: 0
@@ -1422,6 +2016,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1340510788
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1340510789}
+  - component: {fileID: 1340510790}
+  m_Layer: 0
+  m_Name: imNode (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1340510789
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1340510788}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.71, y: 0, z: 3.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2146473876}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1340510790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1340510788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ce32409591154080a3a1f8667a2568d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NavigationNode
+  nodeName: Room
+  nodeDescription: A room in the haunted house
+  atmosphereDescription: The air feels cold and still...
+  connections: []
+  cameraLookRotation: {x: 0, y: 0, z: 0}
+  hasPuzzle: 0
+  puzzleComponent: {fileID: 0}
+  hasKey: 0
+  keyNumber: 0
+  isLocked: 0
+  keysRequired: 0
+  isIntermediateNode: 1
+  doorsToOpen: []
 --- !u!1 &1520520745
 GameObject:
   m_ObjectHideFlags: 0
@@ -1598,6 +2249,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1548834511
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1548834512}
+  - component: {fileID: 1548834513}
+  m_Layer: 0
+  m_Name: imNode (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1548834512
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1548834511}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.48, y: 0, z: 3.9499998}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1148255062}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1548834513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1548834511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ce32409591154080a3a1f8667a2568d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NavigationNode
+  nodeName: Room
+  nodeDescription: A room in the haunted house
+  atmosphereDescription: The air feels cold and still...
+  connections: []
+  cameraLookRotation: {x: 0, y: 0, z: 0}
+  hasPuzzle: 0
+  puzzleComponent: {fileID: 0}
+  hasKey: 0
+  keyNumber: 0
+  isLocked: 0
+  keysRequired: 0
+  isIntermediateNode: 1
+  doorsToOpen: []
 --- !u!1 &1592835843
 GameObject:
   m_ObjectHideFlags: 0
@@ -1615,7 +2323,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1592835844
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1721,6 +2429,7 @@ MonoBehaviour:
   nodeDescription: A room in the haunted house
   atmosphereDescription: The air feels cold and still...
   connections: []
+  cameraLookRotation: {x: 0, y: 0, z: 0}
   hasPuzzle: 0
   puzzleComponent: {fileID: 0}
   hasKey: 0
@@ -1862,7 +2571,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1975545903
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1920,6 +2629,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1975545902}
   m_CullTransparentMesh: 1
+--- !u!114 &2048005288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146473849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b65045182b0ab44728dfd52c1a9f0b63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NavigationHandler
+  positionLerpSpeed: 2
+  rotationSlerpSpeed: 2
+  nodeArrivalDistance: 0.5
 --- !u!1 &2066814454
 GameObject:
   m_ObjectHideFlags: 0
@@ -2182,6 +2906,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b170c5f2ade149f28f415ba8fd9d8a2, type: 3}
+--- !u!1 &2130858925
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2130858926}
+  - component: {fileID: 2130858927}
+  m_Layer: 0
+  m_Name: imNode (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2130858926
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2130858925}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.66, y: 0, z: 4.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2146473876}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2130858927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2130858925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ce32409591154080a3a1f8667a2568d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NavigationNode
+  nodeName: Room
+  nodeDescription: A room in the haunted house
+  atmosphereDescription: The air feels cold and still...
+  connections: []
+  cameraLookRotation: {x: 0, y: 0, z: 0}
+  hasPuzzle: 0
+  puzzleComponent: {fileID: 0}
+  hasKey: 0
+  keyNumber: 0
+  isLocked: 0
+  keysRequired: 0
+  isIntermediateNode: 1
+  doorsToOpen: []
 --- !u!1 &2146473849
 GameObject:
   m_ObjectHideFlags: 0
@@ -2192,6 +2973,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2146473851}
   - component: {fileID: 2146473850}
+  - component: {fileID: 2048005288}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2211,9 +2993,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b287f2b267d9440ea7f2fe431bf2840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingNode: {fileID: 0}
-  masterBedroomNode: {fileID: 0}
-  basementNode: {fileID: 0}
+  startingNode: {fileID: 76844057}
+  masterBedroomNode: {fileID: 1662371871}
+  basementNode: {fileID: 900093510}
+  player1Transform: {fileID: 2146473865}
+  player2Transform: {fileID: 2146473870}
 --- !u!4 &2146473851
 Transform:
   m_ObjectHideFlags: 0
@@ -2271,8 +3055,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 76844056}
   - {fileID: 2146473876}
   - {fileID: 775270251}
+  - {fileID: 1148255062}
   - {fileID: 900093509}
   - {fileID: 1662371870}
   - {fileID: 455820367}
@@ -2305,9 +3091,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 2146473855}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f7c3a2e1d9b4f6c5a8e2d1b9f4c3a7e, type: 3}
+  m_Script: {fileID: 11500000, guid: 9e12a0be51d1747fe95a1b6f4ca6c801, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player1UI:
+    playerNumber: 0
+    keyCountUI: {fileID: 0}
+    interactionPrompt: {fileID: 0}
+    nodeNameUI: {fileID: 0}
+    navigationPanel: {fileID: 0}
+    controlsUI: {fileID: 0}
+  player2UI:
+    playerNumber: 0
+    keyCountUI: {fileID: 0}
+    interactionPrompt: {fileID: 0}
+    nodeNameUI: {fileID: 0}
+    navigationPanel: {fileID: 0}
+    controlsUI: {fileID: 0}
+  navigationButtonPrefab: {fileID: 0}
 --- !u!4 &2146473857
 Transform:
   m_ObjectHideFlags: 0
@@ -2694,7 +3495,7 @@ GameObject:
   - component: {fileID: 2146473876}
   - component: {fileID: 2146473877}
   m_Layer: 0
-  m_Name: Living Room
+  m_Name: '[Living Room]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2713,8 +3514,12 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2130858926}
+  - {fileID: 519508831}
   - {fileID: 1027248906}
   - {fileID: 402443381}
+  - {fileID: 1250899141}
+  - {fileID: 1340510789}
   m_Father: {fileID: 2146473854}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2146473877
@@ -2738,6 +3543,16 @@ MonoBehaviour:
     intermediateNodes:
     - {fileID: 1027248907}
     - {fileID: 402443382}
+  - destinationNode: {fileID: 1662371871}
+    label: Bedroom 2
+    intermediateNodes:
+    - {fileID: 2130858927}
+    - {fileID: 1340510790}
+  - destinationNode: {fileID: 1148255063}
+    label: Hallway
+    intermediateNodes:
+    - {fileID: 2130858927}
+  cameraLookRotation: {x: 0, y: 0, z: 0}
   hasPuzzle: 0
   puzzleComponent: {fileID: 0}
   hasKey: 0
@@ -2746,6 +3561,107 @@ MonoBehaviour:
   keysRequired: 0
   isIntermediateNode: 0
   doorsToOpen: []
+--- !u!1001 &5982625242881272157
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 52585045}
+    m_Modifications:
+    - target: {fileID: 2742179914026223687, guid: 48e2ac9cdd35c464982897bd26323444, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2742179914026223687, guid: 48e2ac9cdd35c464982897bd26323444, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2742179914026223687, guid: 48e2ac9cdd35c464982897bd26323444, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2742179914026223687, guid: 48e2ac9cdd35c464982897bd26323444, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2742179914026223687, guid: 48e2ac9cdd35c464982897bd26323444, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2742179914026223687, guid: 48e2ac9cdd35c464982897bd26323444, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2742179914026223687, guid: 48e2ac9cdd35c464982897bd26323444, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 240
+      objectReference: {fileID: 0}
+    - target: {fileID: 2742179914026223687, guid: 48e2ac9cdd35c464982897bd26323444, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 2742179914026223687, guid: 48e2ac9cdd35c464982897bd26323444, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2742179914026223687, guid: 48e2ac9cdd35c464982897bd26323444, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2742179914026223687, guid: 48e2ac9cdd35c464982897bd26323444, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2742179914026223687, guid: 48e2ac9cdd35c464982897bd26323444, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2742179914026223687, guid: 48e2ac9cdd35c464982897bd26323444, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2742179914026223687, guid: 48e2ac9cdd35c464982897bd26323444, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2742179914026223687, guid: 48e2ac9cdd35c464982897bd26323444, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2742179914026223687, guid: 48e2ac9cdd35c464982897bd26323444, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2742179914026223687, guid: 48e2ac9cdd35c464982897bd26323444, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2742179914026223687, guid: 48e2ac9cdd35c464982897bd26323444, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2742179914026223687, guid: 48e2ac9cdd35c464982897bd26323444, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2742179914026223687, guid: 48e2ac9cdd35c464982897bd26323444, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7093218613057843937, guid: 48e2ac9cdd35c464982897bd26323444, type: 3}
+      propertyPath: m_Name
+      value: Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 7093218613057843937, guid: 48e2ac9cdd35c464982897bd26323444, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 48e2ac9cdd35c464982897bd26323444, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

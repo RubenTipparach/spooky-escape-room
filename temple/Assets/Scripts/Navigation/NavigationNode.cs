@@ -25,6 +25,9 @@ public class NavigationNode : MonoBehaviour
 
     [SerializeField] private List<NodeConnection> connections = new List<NodeConnection>();
 
+    // Camera settings for this node
+    [SerializeField] private Vector3 cameraLookRotation = Vector3.zero; // Euler angles for where camera should face
+
     // Puzzle and key related
     [SerializeField] private bool hasPuzzle = false;
     [SerializeField] private Puzzle puzzleComponent = null;
@@ -43,6 +46,7 @@ public class NavigationNode : MonoBehaviour
     public string NodeDescription => nodeDescription;
     public string AtmosphereDescription => atmosphereDescription;
     public List<NodeConnection> Connections => connections;
+    public Vector3 CameraLookRotation => cameraLookRotation;
     public bool HasPuzzle => hasPuzzle;
     public Puzzle PuzzleComponent => puzzleComponent;
     public bool HasKey => hasKey;

@@ -13,11 +13,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] private NavigationNode masterBedroomNode;
     [SerializeField] private NavigationNode basementNode;
 
+    [SerializeField] private Transform player1Transform;
+    [SerializeField] private Transform player2Transform;
+
     // Game state
     private Dictionary<int, bool> keysCollected = new Dictionary<int, bool>();
     private NavigationNode currentNode;
     private bool gameOver = false;
     private bool demonEncountered = false;
+
+    // Navigation
+    private NavigationHandler navigationHandler;
 
     // Events
     public event Action<int> OnKeyCollected; // Called with key number
@@ -36,6 +42,14 @@ public class GameManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        // Get or create navigation handler
+        navigationHandler = GetComponent<NavigationHandler>();
+        if (navigationHandler == null)
+        {
+            navigationHandler = gameObject.AddComponent<NavigationHandler>();
+        }
+
         InitializeGameState();
     }
 
@@ -107,7 +121,7 @@ public class GameManager : MonoBehaviour
         return count;
     }
 
-    public void NavigateToNode(NavigationNode node)
+    public void NavigateToNode(NavigationNode node, int playerNumber = 0)
     {
         if (node == null)
         {
@@ -121,10 +135,46 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        // Move the player smoothly to the node
+        if (playerNumber == 1 && player1Transform != null)
+        {
+            NavigatePlayerToNode(player1Transform, node);
+        }
+        else if (playerNumber == 2 && player2Transform != null)
+        {
+            NavigatePlayerToNode(player2Transform, node);
+        }
+        else if (playerNumber == 0)
+        {
+            // Navigate both players
+            if (player1Transform != null)
+                NavigatePlayerToNode(player1Transform, node);
+            if (player2Transform != null)
+                NavigatePlayerToNode(player2Transform, node);
+        }
+
         currentNode = node;
         currentNode.MarkAsVisited();
         OnNodeChanged?.Invoke(currentNode);
         Debug.Log($"Navigated to: {node.NodeName}");
+    }
+
+    private void NavigatePlayerToNode(Transform playerTransform, NavigationNode destinationNode)
+    {
+        if (navigationHandler == null) return;
+
+        // Find the connection to get intermediate nodes
+        List<NavigationNode> intermediateNodes = null;
+        foreach (var connection in currentNode.Connections)
+        {
+            if (connection.destinationNode == destinationNode)
+            {
+                intermediateNodes = connection.intermediateNodes;
+                break;
+            }
+        }
+
+        navigationHandler.NavigateToNode(playerTransform, destinationNode, intermediateNodes);
     }
 
     public NavigationNode GetCurrentNode()
