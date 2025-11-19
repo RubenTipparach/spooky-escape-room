@@ -3,82 +3,7 @@ guid: 6b170c5f2ade149f28f415ba8fd9d8a2
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material.001
-    second: {fileID: 2100000, guid: e59d418b2fbcf4dbdaf1e2177b60ded7, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material.003
-    second: {fileID: 2100000, guid: 73d2572a75d7b42dd95bd1a1c85516fd, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: asphalt
-    second: {fileID: 2100000, guid: cd912c7738b254f58a4ed5e35d41298d, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: birck
-    second: {fileID: 2100000, guid: 2394390d112f747aaac6b90a2d4103c2, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: carpet_floor_1
-    second: {fileID: 2100000, guid: 1de3be057743c46f1adf635504fcb8e9, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: carpet_floor_2
-    second: {fileID: 2100000, guid: 51f92870f8eea476ea5defbc80ae1979, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: cieling
-    second: {fileID: 2100000, guid: 92a72ef67545346f28c9f8eac681a969, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: concrete
-    second: {fileID: 2100000, guid: 33a6477f6fb0344acb55f0f1879166b5, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: concrete.001
-    second: {fileID: 2100000, guid: c52d67dec415d4820a5b023a585b1963, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: floor
-    second: {fileID: 2100000, guid: 41b49512d4e4d4eeab7540d7b95dbb5f, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: plaster
-    second: {fileID: 2100000, guid: 39f2aced9dc8f4c4b82c3d2445a37b4f, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: roof
-    second: {fileID: 2100000, guid: b452167a7844447f3b7dea535de7e110, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: wet_tile_floor
-    second: {fileID: 2100000, guid: 470db786fd3f54591ab71df93172e7ba, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: wood_fennce
-    second: {fileID: 2100000, guid: ab146daa337de44dba763f52795c6961, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: wood_floor
-    second: {fileID: 2100000, guid: 39a794653b3c445ea9fb4ed8ed67314b, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -121,7 +46,7 @@ ModelImporter:
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
-    generateSecondaryUV: 1
+    generateSecondaryUV: 0
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1
