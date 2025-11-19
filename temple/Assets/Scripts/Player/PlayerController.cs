@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// Controls a single player's movement and interactions
@@ -16,13 +17,13 @@ public class PlayerController : MonoBehaviour
     private Vector3 moveDirection = Vector3.zero;
     private bool isMoving = false;
 
-    // Input mapping
-    private KeyCode moveUp;
-    private KeyCode moveDown;
-    private KeyCode moveLeft;
-    private KeyCode moveRight;
-    private KeyCode interactPrimary;
-    private KeyCode interactSecondary;
+    // Input System references
+    private InputAction moveUpAction;
+    private InputAction moveDownAction;
+    private InputAction moveLeftAction;
+    private InputAction moveRightAction;
+    private InputAction interactPrimaryAction;
+    private InputAction interactSecondaryAction;
 
     public int PlayerNumber => playerNumber;
     public bool IsMoving => isMoving;
@@ -38,26 +39,46 @@ public class PlayerController : MonoBehaviour
         SetupInputMapping();
     }
 
+    private void OnEnable()
+    {
+        moveUpAction?.Enable();
+        moveDownAction?.Enable();
+        moveLeftAction?.Enable();
+        moveRightAction?.Enable();
+        interactPrimaryAction?.Enable();
+        interactSecondaryAction?.Enable();
+    }
+
+    private void OnDisable()
+    {
+        moveUpAction?.Disable();
+        moveDownAction?.Disable();
+        moveLeftAction?.Disable();
+        moveRightAction?.Disable();
+        interactPrimaryAction?.Disable();
+        interactSecondaryAction?.Disable();
+    }
+
     private void SetupInputMapping()
     {
         if (playerNumber == 1)
         {
-            moveUp = KeyCode.W;
-            moveDown = KeyCode.S;
-            moveLeft = KeyCode.A;
-            moveRight = KeyCode.D;
-            interactPrimary = KeyCode.Z;
-            interactSecondary = KeyCode.X;
+            moveUpAction = new InputAction(binding: "<Keyboard>/w");
+            moveDownAction = new InputAction(binding: "<Keyboard>/s");
+            moveLeftAction = new InputAction(binding: "<Keyboard>/a");
+            moveRightAction = new InputAction(binding: "<Keyboard>/d");
+            interactPrimaryAction = new InputAction(binding: "<Keyboard>/z");
+            interactSecondaryAction = new InputAction(binding: "<Keyboard>/x");
             Debug.Log("Player 1 controls: WASD movement, Z/X interaction");
         }
         else if (playerNumber == 2)
         {
-            moveUp = KeyCode.UpArrow;
-            moveDown = KeyCode.DownArrow;
-            moveLeft = KeyCode.LeftArrow;
-            moveRight = KeyCode.RightArrow;
-            interactPrimary = KeyCode.M;
-            interactSecondary = KeyCode.N;
+            moveUpAction = new InputAction(binding: "<Keyboard>/upArrow");
+            moveDownAction = new InputAction(binding: "<Keyboard>/downArrow");
+            moveLeftAction = new InputAction(binding: "<Keyboard>/leftArrow");
+            moveRightAction = new InputAction(binding: "<Keyboard>/rightArrow");
+            interactPrimaryAction = new InputAction(binding: "<Keyboard>/m");
+            interactSecondaryAction = new InputAction(binding: "<Keyboard>/n");
             Debug.Log("Player 2 controls: Arrow Keys movement, M/N interaction");
         }
         else
@@ -85,13 +106,13 @@ public class PlayerController : MonoBehaviour
         float horizontal = 0;
         float vertical = 0;
 
-        if (Input.GetKey(moveUp))
+        if (moveUpAction.IsPressed())
             vertical += 1;
-        if (Input.GetKey(moveDown))
+        if (moveDownAction.IsPressed())
             vertical -= 1;
-        if (Input.GetKey(moveLeft))
+        if (moveLeftAction.IsPressed())
             horizontal -= 1;
-        if (Input.GetKey(moveRight))
+        if (moveRightAction.IsPressed())
             horizontal += 1;
 
         moveDirection = new Vector3(horizontal, 0, vertical).normalized;
@@ -119,12 +140,12 @@ public class PlayerController : MonoBehaviour
 
     private void HandleInteractionInput()
     {
-        if (Input.GetKeyDown(interactPrimary))
+        if (interactPrimaryAction.WasPressedThisFrame())
         {
             TryInteract(0); // Primary interaction
         }
 
-        if (Input.GetKeyDown(interactSecondary))
+        if (interactSecondaryAction.WasPressedThisFrame())
         {
             TryInteract(1); // Secondary interaction
         }

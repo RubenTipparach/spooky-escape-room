@@ -251,8 +251,8 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 24
   aspectMode:
-    m_OverrideState: 0
-    m_Value: 3
+    m_OverrideState: 1
+    m_Value: 0
   targetRasterizationResolutionWidth:
     m_OverrideState: 1
     m_Value: 512
@@ -260,13 +260,13 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 448
   isDepthBufferEnabled:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
   isClearDepthAfterBackgroundEnabled:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
   isClearDepthBeforeUIEnabled:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
 --- !u!114 &4604547862348978937
 MonoBehaviour:
