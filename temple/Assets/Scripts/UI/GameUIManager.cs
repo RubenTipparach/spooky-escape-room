@@ -135,20 +135,19 @@ public class GameUIManager : MonoBehaviour
         ClearNavigationButtons(player1NavigationPanel);
         ClearNavigationButtons(player2NavigationPanel);
 
-        // Create buttons for each connected node
-        for (int i = 0; i < node.ConnectedNodes.Count; i++)
+        // Create buttons for each connection
+        foreach (var connection in node.Connections)
         {
-            NavigationNode connectedNode = node.ConnectedNodes[i];
-            string connectionLabel = node.GetConnectionDescription(i);
+            if (connection.destinationNode == null) continue;
 
             if (player1NavigationPanel != null)
             {
-                CreateNavigationButton(player1NavigationPanel, connectionLabel, connectedNode, 1);
+                CreateNavigationButton(player1NavigationPanel, connection.label, connection.destinationNode, 1);
             }
 
             if (player2NavigationPanel != null)
             {
-                CreateNavigationButton(player2NavigationPanel, connectionLabel, connectedNode, 2);
+                CreateNavigationButton(player2NavigationPanel, connection.label, connection.destinationNode, 2);
             }
         }
     }

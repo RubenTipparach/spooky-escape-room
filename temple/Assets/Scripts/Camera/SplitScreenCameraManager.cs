@@ -24,20 +24,6 @@ public class SplitScreenCameraManager : MonoBehaviour
             return;
         }
 
-        SetupSplitScreenViewports();
-    }
-
-    private void SetupSplitScreenViewports()
-    {
-        // Player 1 - Left half of screen
-        Rect player1Viewport = new Rect(0, 0, 0.5f, 1);
-        player1Camera.rect = player1Viewport;
-
-        // Player 2 - Right half of screen
-        Rect player2Viewport = new Rect(0.5f, 0, 0.5f, 1);
-        player2Camera.rect = player2Viewport;
-
-        Debug.Log("Split-screen viewports configured");
     }
 
     private void LateUpdate()

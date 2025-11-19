@@ -2,6 +2,17 @@ using UnityEngine;
 using System.Collections.Generic;
 
 /// <summary>
+/// Represents a connection to another node, optionally with intermediate nodes for traversal animation
+/// </summary>
+[System.Serializable]
+public class NodeConnection
+{
+    [SerializeField] public NavigationNode destinationNode;
+    [SerializeField] public string label = "Go to Room";
+    [SerializeField] public List<NavigationNode> intermediateNodes = new List<NavigationNode>();
+}
+
+/// <summary>
 /// Represents a navigable location in the game world (rooms, hallways, etc.)
 /// Players can traverse between connected nodes
 /// </summary>
@@ -12,8 +23,7 @@ public class NavigationNode : MonoBehaviour
     [TextArea(3, 5)]
     [SerializeField] private string atmosphereDescription = "The air feels cold and still...";
 
-    [SerializeField] private List<NavigationNode> connectedNodes = new List<NavigationNode>();
-    [SerializeField] private List<string> connectionLabels = new List<string>();
+    [SerializeField] private List<NodeConnection> connections = new List<NodeConnection>();
 
     // Puzzle and key related
     [SerializeField] private bool hasPuzzle = false;
@@ -23,17 +33,16 @@ public class NavigationNode : MonoBehaviour
     [SerializeField] private bool isLocked = false;
     [SerializeField] private int keysRequired = 0;
 
-    // Player spawn points when entering this node
-    [SerializeField] private Transform player1SpawnPoint;
-    [SerializeField] private Transform player2SpawnPoint;
+    // Intermediate nodes for traversal animation
+    [SerializeField] private bool isIntermediateNode = false;
+    [SerializeField] private List<InteractableObject> doorsToOpen = new List<InteractableObject>();
 
     private bool hasBeenVisited = false;
 
     public string NodeName => nodeName;
     public string NodeDescription => nodeDescription;
     public string AtmosphereDescription => atmosphereDescription;
-    public List<NavigationNode> ConnectedNodes => connectedNodes;
-    public List<string> ConnectionLabels => connectionLabels;
+    public List<NodeConnection> Connections => connections;
     public bool HasPuzzle => hasPuzzle;
     public Puzzle PuzzleComponent => puzzleComponent;
     public bool HasKey => hasKey;
@@ -41,24 +50,8 @@ public class NavigationNode : MonoBehaviour
     public bool IsLocked => isLocked;
     public int KeysRequired => keysRequired;
     public bool HasBeenVisited => hasBeenVisited;
-
-    private void OnValidate()
-    {
-        // Ensure labels match connected nodes count
-        while (connectionLabels.Count < connectedNodes.Count)
-        {
-            connectionLabels.Add("Go to Room");
-        }
-        while (connectionLabels.Count > connectedNodes.Count)
-        {
-            connectionLabels.RemoveAt(connectionLabels.Count - 1);
-        }
-    }
-
-    public Transform GetSpawnPoint(int playerNumber)
-    {
-        return playerNumber == 1 ? player1SpawnPoint : player2SpawnPoint;
-    }
+    public bool IsIntermediateNode => isIntermediateNode;
+    public List<InteractableObject> DoorsToOpen => doorsToOpen;
 
     public void MarkAsVisited()
     {
@@ -67,11 +60,20 @@ public class NavigationNode : MonoBehaviour
 
     public string GetConnectionDescription(int index)
     {
-        if (index >= 0 && index < connectionLabels.Count)
+        if (index >= 0 && index < connections.Count)
         {
-            return connectionLabels[index];
+            return connections[index].label;
         }
         return "Go";
+    }
+
+    public NavigationNode GetConnectedNode(int index)
+    {
+        if (index >= 0 && index < connections.Count)
+        {
+            return connections[index].destinationNode;
+        }
+        return null;
     }
 
     public bool CanAccess()
@@ -83,22 +85,89 @@ public class NavigationNode : MonoBehaviour
         return manager != null && manager.GetTotalKeysCollected() >= keysRequired;
     }
 
+    public void OpenDoorsOnTraversal()
+    {
+        // Open all doors associated with this traversal
+        foreach (var door in doorsToOpen)
+        {
+            if (door != null)
+            {
+                door.OnInteract(null);
+                Debug.Log($"Door opened on traversal through {nodeName}");
+            }
+        }
+    }
+
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
-        // Draw connections to other nodes for debugging
-        Gizmos.color = Color.cyan;
-        foreach (var connectedNode in connectedNodes)
+        // Draw this node as a cube (larger for main nodes, smaller red for intermediate)
+        if (isIntermediateNode)
         {
-            if (connectedNode != null)
+            Gizmos.color = Color.red;
+            Gizmos.DrawCube(transform.position, Vector3.one * 0.5f);
+        }
+        else
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawCube(transform.position, Vector3.one * 1f);
+
+            // Draw label for non-intermediate nodes when selected
+            //UnityEditor.Handles.color = Color.white;
+            //UnityEditor.Handles.Label(transform.position + Vector3.up * 0.75f, nodeName);
+        }
+
+        // Draw connections to other nodes
+        Gizmos.color = Color.cyan;
+        foreach (var connection in connections)
+        {
+            DrawConnectionPath(connection);
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        // Draw node cube even when not selected (for better visibility in large scenes)
+        if (isIntermediateNode)
+        {
+            Gizmos.color = new Color(1, 0, 0, 0.3f); // Red, semi-transparent
+            Gizmos.DrawCube(transform.position, Vector3.one * 0.5f);
+        }
+        else
+        {
+            Gizmos.color = new Color(1, 1, 0, 0.3f); // Yellow, semi-transparent
+            Gizmos.DrawCube(transform.position, Vector3.one * 1f);
+        }
+
+        // Draw connections to other nodes
+        Gizmos.color = Color.cyan;
+        foreach (var connection in connections)
+        {
+            DrawConnectionPath(connection);
+        }
+    }
+
+    private void DrawConnectionPath(NodeConnection connection)
+    {
+        if (connection.destinationNode == null) return;
+
+        Vector3 currentPosition = transform.position;
+
+        // Draw lines through intermediate nodes in order
+        if (connection.intermediateNodes.Count > 0)
+        {
+            foreach (var intermediateNode in connection.intermediateNodes)
             {
-                Gizmos.DrawLine(transform.position, connectedNode.transform.position);
-                Gizmos.DrawSphere(connectedNode.transform.position, 0.5f);
+                if (intermediateNode != null)
+                {
+                    Gizmos.DrawLine(currentPosition, intermediateNode.transform.position);
+                    currentPosition = intermediateNode.transform.position;
+                }
             }
         }
 
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(transform.position, 0.5f);
+        // Draw final line to destination
+        Gizmos.DrawLine(currentPosition, connection.destinationNode.transform.position);
     }
 #endif
 }

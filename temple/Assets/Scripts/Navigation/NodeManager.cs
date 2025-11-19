@@ -75,12 +75,13 @@ public class NodeManager : MonoBehaviour
         foreach (var node in allNodes)
         {
             Debug.Log($"Node: {node.NodeName}");
-            Debug.Log($"  Connections: {node.ConnectedNodes.Count}");
-            for (int i = 0; i < node.ConnectedNodes.Count; i++)
+            Debug.Log($"  Connections: {node.Connections.Count}");
+            foreach (var connection in node.Connections)
             {
-                NavigationNode connectedNode = node.ConnectedNodes[i];
-                string label = node.GetConnectionDescription(i);
-                Debug.Log($"    -> {label}: {connectedNode.NodeName}");
+                if (connection.destinationNode != null)
+                {
+                    Debug.Log($"    -> {connection.label}: {connection.destinationNode.NodeName}");
+                }
             }
         }
     }
