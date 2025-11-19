@@ -47,7 +47,16 @@
     <Analyzer Include="/Applications/Unity/Hub/Editor/6000.2.12f1/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets/Scripts/Interaction/IInteractable.cs" />
+    <Compile Include="Assets/Scripts/Navigation/NodeManager.cs" />
+    <Compile Include="Assets/Scripts/Managers/GameManager.cs" />
+    <Compile Include="Assets/Scripts/UI/GameUIManager.cs" />
+    <Compile Include="Assets/Scripts/Player/PlayerController.cs" />
     <Compile Include="Assets/TutorialInfo/Scripts/Readme.cs" />
+    <Compile Include="Assets/Scripts/Navigation/NavigationNode.cs" />
+    <Compile Include="Assets/Scripts/Camera/SplitScreenCameraManager.cs" />
+    <Compile Include="Assets/Scripts/Puzzles/Puzzle.cs" />
+    <Compile Include="Assets/Scripts/Interaction/InteractableObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/Art/Textures/SBS - Tiny Texture Pack 3 - Medium/License.txt" />

@@ -1,0 +1,87 @@
+using UnityEngine;
+using System.Collections.Generic;
+
+/// <summary>
+/// Manages all navigation nodes in the game
+/// Handles node registration and setup
+/// </summary>
+public class NodeManager : MonoBehaviour
+{
+    public static NodeManager Instance { get; private set; }
+
+    private Dictionary<string, NavigationNode> nodesRegistry = new Dictionary<string, NavigationNode>();
+    private List<NavigationNode> allNodes = new List<NavigationNode>();
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+        RegisterAllNodes();
+    }
+
+    private void RegisterAllNodes()
+    {
+        // Find all navigation nodes in the scene
+        NavigationNode[] nodes = FindObjectsOfType<NavigationNode>();
+
+        foreach (NavigationNode node in nodes)
+        {
+            RegisterNode(node);
+        }
+
+        Debug.Log($"Registered {allNodes.Count} navigation nodes");
+    }
+
+    private void RegisterNode(NavigationNode node)
+    {
+        if (node == null) return;
+
+        if (nodesRegistry.ContainsKey(node.NodeName))
+        {
+            Debug.LogWarning($"Node '{node.NodeName}' already registered!");
+            return;
+        }
+
+        nodesRegistry[node.NodeName] = node;
+        allNodes.Add(node);
+        Debug.Log($"Registered node: {node.NodeName}");
+    }
+
+    public NavigationNode GetNode(string nodeName)
+    {
+        if (nodesRegistry.ContainsKey(nodeName))
+        {
+            return nodesRegistry[nodeName];
+        }
+
+        Debug.LogWarning($"Node '{nodeName}' not found in registry");
+        return null;
+    }
+
+    public List<NavigationNode> GetAllNodes()
+    {
+        return new List<NavigationNode>(allNodes);
+    }
+
+    public void PrintNodeMap()
+    {
+        Debug.Log("=== Node Map ===");
+        foreach (var node in allNodes)
+        {
+            Debug.Log($"Node: {node.NodeName}");
+            Debug.Log($"  Connections: {node.ConnectedNodes.Count}");
+            for (int i = 0; i < node.ConnectedNodes.Count; i++)
+            {
+                NavigationNode connectedNode = node.ConnectedNodes[i];
+                string label = node.GetConnectionDescription(i);
+                Debug.Log($"    -> {label}: {connectedNode.NodeName}");
+            }
+        }
+    }
+}
