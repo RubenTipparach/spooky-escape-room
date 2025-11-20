@@ -53,7 +53,6 @@
     <Compile Include="Assets/Scripts/UI/GameUIManager.cs" />
     <Compile Include="Assets/Scripts/Interaction/Door.cs" />
     <Compile Include="Assets/Scripts/Player/PlayerController.cs" />
-    <Compile Include="Assets/TutorialInfo/Scripts/Readme.cs" />
     <Compile Include="Assets/Scripts/Navigation/NavigationNode.cs" />
     <Compile Include="Assets/Scripts/Camera/SplitScreenCameraManager.cs" />
     <Compile Include="Assets/Scripts/Navigation/NavigationHandler.cs" />
