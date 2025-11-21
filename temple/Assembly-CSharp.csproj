@@ -58,6 +58,7 @@
     <Compile Include="Assets/Scripts/Navigation/NavigationHandler.cs" />
     <Compile Include="Assets/Scripts/Puzzles/Puzzle.cs" />
     <Compile Include="Assets/Scripts/Interaction/InteractableObject.cs" />
+    <Compile Include="Assets/Scripts/UI/ScreenSwitcher.cs" />
     <Compile Include="Assets/Scripts/Managers/DebugVisualizationManager.cs" />
     <Compile Include="Assets/Scripts/UI/UIManager.cs" />
   </ItemGroup>

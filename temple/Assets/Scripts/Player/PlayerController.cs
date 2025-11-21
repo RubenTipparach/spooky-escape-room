@@ -6,7 +6,5 @@ using UnityEngine;
 /// </summary>
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private int playerNumber = 1; // 1 or 2
-
-    public int PlayerNumber => playerNumber;
+    public NavigationNode currentNode;
 }

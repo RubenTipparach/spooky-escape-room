@@ -411,13 +411,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 712135021769130448}
+        m_TargetAssemblyTypeName: NavButton, Assembly-CSharp
+        m_MethodName: GoToNavNode
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -439,6 +439,7 @@ MonoBehaviour:
   goto_icon: {fileID: 1633219824520048081}
   locked_icon: {fileID: 3350550331259765949}
   navigationNode: {fileID: 0}
+  navState: 0
 --- !u!1 &3350550331259765949
 GameObject:
   m_ObjectHideFlags: 0

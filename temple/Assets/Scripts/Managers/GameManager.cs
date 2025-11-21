@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     // Events
     public event Action<int> OnKeyCollected;
 
+    public PlayerController playerController;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
