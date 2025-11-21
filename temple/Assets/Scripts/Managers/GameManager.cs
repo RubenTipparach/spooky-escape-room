@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
 
     public PlayerController playerController;
 
+    public NavigationNode startingNode;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -33,6 +35,8 @@ public class GameManager : MonoBehaviour
         {
             keysCollected[i] = false;
         }
+
+        playerController.SetStartingNode(startingNode);
     }
 
     public void CollectKey(int keyNumber)

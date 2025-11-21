@@ -7,4 +7,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public NavigationNode currentNode;
+
+    public void SetStartingNode(NavigationNode startingNode)
+    {
+        currentNode = startingNode;
+        transform.position = startingNode.transform.position;
+        // TODO activate current puzzles.
+    }
 }
