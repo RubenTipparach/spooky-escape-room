@@ -20,7 +20,7 @@ public abstract class InteractableObject : MonoBehaviour, IInteractable
         if (player != null && showPromptWhenNear)
         {
             lastPlayerNear = player;
-            GameUIManager.Instance?.UpdateInteractionPrompt(player.PlayerNumber, interactionPromptPrimary);
+            //GameUIManager.Instance?.UpdateInteractionPrompt(player.PlayerNumber, interactionPromptPrimary);
         }
     }
 
@@ -29,7 +29,7 @@ public abstract class InteractableObject : MonoBehaviour, IInteractable
         PlayerController player = collision.GetComponent<PlayerController>();
         if (player != null && player == lastPlayerNear)
         {
-            GameUIManager.Instance?.ClearInteractionPrompt(player.PlayerNumber);
+            //GameUIManager.Instance?.ClearInteractionPrompt(player.PlayerNumber);
             lastPlayerNear = null;
         }
     }

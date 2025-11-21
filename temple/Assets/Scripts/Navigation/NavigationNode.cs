@@ -85,8 +85,9 @@ public class NavigationNode : MonoBehaviour
         if (!isLocked) return true;
 
         // Check if player has enough keys
-        GameManager manager = GameManager.Instance;
-        return manager != null && manager.GetTotalKeysCollected() >= keysRequired;
+        // GameManager manager = GameManager.Instance;
+        // return manager != null && manager.GetTotalKeysCollected() >= keysRequired;
+        return false; // Placeholder until GameManager reference is added
     }
 
     public void OpenDoorsOnTraversal()
