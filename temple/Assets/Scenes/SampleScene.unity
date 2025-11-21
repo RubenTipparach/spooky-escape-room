@@ -298,7 +298,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ce32409591154080a3a1f8667a2568d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NavigationNode
-  nodeName: Room
+  nodeName: Yard
   nodeDescription: A room in the haunted house
   atmosphereDescription: The air feels cold and still...
   connections:
@@ -4257,6 +4257,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: -7144018882618261625, guid: 6b170c5f2ade149f28f415ba8fd9d8a2, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c9e58bced07634247aa9b91f5a0ab59e, type: 2}
     - target: {fileID: -6258181035773486596, guid: 6b170c5f2ade149f28f415ba8fd9d8a2, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
@@ -4365,6 +4369,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 6721540362325620393, guid: 6b170c5f2ade149f28f415ba8fd9d8a2, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c9e58bced07634247aa9b91f5a0ab59e, type: 2}
     - target: {fileID: 7321736993799237279, guid: 6b170c5f2ade149f28f415ba8fd9d8a2, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -4373,6 +4381,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 7894850946704846058, guid: 6b170c5f2ade149f28f415ba8fd9d8a2, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c9e58bced07634247aa9b91f5a0ab59e, type: 2}
     - target: {fileID: 8219861716515540723, guid: 6b170c5f2ade149f28f415ba8fd9d8a2, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -4475,7 +4487,7 @@ GameObject:
   - component: {fileID: 2146473850}
   - component: {fileID: 2048005288}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: '[GameManager]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4576,7 +4588,7 @@ GameObject:
   - component: {fileID: 2146473857}
   - component: {fileID: 2146473856}
   m_Layer: 0
-  m_Name: UIManager
+  m_Name: '[UIManager]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4594,21 +4606,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e12a0be51d1747fe95a1b6f4ca6c801, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1UI:
-    playerNumber: 1
-    keyCountUI: {fileID: 437203315}
-    interactionPrompt: {fileID: 1391162340}
-    nodeNameUI: {fileID: 1525954909}
-    navigationPanel: {fileID: 621655083}
-    controlsUI: {fileID: 1922346092}
-  player2UI:
-    playerNumber: 2
-    keyCountUI: {fileID: 1243795150}
-    interactionPrompt: {fileID: 1429718985}
-    nodeNameUI: {fileID: 1078661571}
-    navigationPanel: {fileID: 642197925}
-    controlsUI: {fileID: 1836822951}
-  navigationButtonPrefab: {fileID: 7093218613057843937, guid: 48e2ac9cdd35c464982897bd26323444, type: 3}
+  menuPanel: {fileID: 0}
+  menuButtonPrefab: {fileID: 0}
+  currentLocationText: {fileID: 0}
+  keyCountText: {fileID: 0}
 --- !u!4 &2146473857
 Transform:
   m_ObjectHideFlags: 0
@@ -4736,9 +4737,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNumber: 1
-  moveSpeed: 5
-  rotationSpeed: 5
-  interactionRange: 2
 --- !u!4 &2146473865
 Transform:
   m_ObjectHideFlags: 0
@@ -4835,9 +4833,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNumber: 2
-  moveSpeed: 5
-  rotationSpeed: 5
-  interactionRange: 2
 --- !u!4 &2146473870
 Transform:
   m_ObjectHideFlags: 0

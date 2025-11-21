@@ -5,74 +5,216 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 /// <summary>
-/// Encapsulates UI elements and logic for a single player
+/// Menu-based UI for navigation and interactions
+/// Players navigate using arrow keys (P2) and WASD (P1)
+/// Maintains separate state for each player
 /// </summary>
-[System.Serializable]
-public class PlayerUIContext
+public class GameUIManager : MonoBehaviour
 {
-    public int playerNumber;
-    public TextMeshProUGUI keyCountUI;
-    public TextMeshProUGUI interactionPrompt;
-    public TextMeshProUGUI nodeNameUI;
-    public Transform navigationPanel;
-    public TextMeshProUGUI controlsUI;
+    public static GameUIManager Instance { get; private set; }
 
-    private List<GameObject> navigationButtons = new List<GameObject>();
-    private List<NavigationNode> currentConnections = new List<NavigationNode>();
-    private int selectedConnectionIndex = 0;
+    [SerializeField] private Transform menuPanel;
+    [SerializeField] private GameObject menuButtonPrefab;
+    [SerializeField] private TextMeshProUGUI currentLocationText;
+    [SerializeField] private TextMeshProUGUI keyCountText;
 
-    public void Initialize()
+    private List<GameObject> currentMenuButtons = new List<GameObject>();
+    private List<System.Action> currentMenuActions = new List<System.Action>();
+    private NavigationNode currentNode;
+
+    // Separate state for each player
+    private int player1SelectedMenuIndex = 0;
+    private int player2SelectedMenuIndex = 0;
+    private string player1InteractionPrompt = "";
+    private string player2InteractionPrompt = "";
+
+    private void Awake()
     {
-        if (controlsUI != null)
+        if (Instance != null && Instance != this)
         {
-            if (playerNumber == 1)
-            {
-                controlsUI.text = "PLAYER 1\nNavigate: WASD\nSelect: Z\nCancel: X";
-            }
-            else
-            {
-                controlsUI.text = "PLAYER 2\nNavigate: Arrows\nSelect: M\nCancel: N";
-            }
-        }
-    }
-
-    public void UpdateNodeDisplay(NavigationNode node)
-    {
-        if (nodeNameUI != null)
-            nodeNameUI.text = node.NodeName;
-    }
-
-    public void UpdateKeyCountDisplay(int totalKeys)
-    {
-        if (keyCountUI != null)
-            keyCountUI.text = $"Keys: {totalKeys}/4";
-    }
-
-    public void UpdateNavigationOptions(NavigationNode node, GameObject navigationButtonPrefab)
-    {
-        ClearNavigationButtons();
-        currentConnections.Clear();
-        selectedConnectionIndex = 0;
-
-        foreach (var connection in node.Connections)
-        {
-            if (connection.destinationNode == null) continue;
-            currentConnections.Add(connection.destinationNode);
-            CreateNavigationButton(connection.label, connection.destinationNode, navigationButtonPrefab);
-        }
-
-        UpdateNavigationHighlight();
-    }
-
-    private void CreateNavigationButton(string label, NavigationNode targetNode, GameObject navigationButtonPrefab)
-    {
-        if (navigationButtonPrefab == null)
-        {
-            Debug.LogWarning("Navigation button prefab not assigned!");
+            Destroy(gameObject);
             return;
         }
 
-        GameObject buttonObj = Object.Instantiate(navigationButtonPrefab, navigationPanel);
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
+    private void Start()
+    {
+        SubscribeToGameEvents();
+        UpdateKeyCountDisplay();
+    }
+
+    private void Update()
+    {
+        HandleMenuNavigation();
+    }
+
+    private void HandleMenuNavigation()
+    {
+        if (currentMenuButtons.Count == 0) return;
+
+        // Player 1 uses WASD
+        if (Keyboard.current.wKey.wasPressedThisFrame)
+        {
+            player1SelectedMenuIndex = (player1SelectedMenuIndex - 1 + currentMenuButtons.Count) % currentMenuButtons.Count;
+            UpdateMenuHighlight();
+        }
+
+        if (Keyboard.current.sKey.wasPressedThisFrame)
+        {
+            player1SelectedMenuIndex = (player1SelectedMenuIndex + 1) % currentMenuButtons.Count;
+            UpdateMenuHighlight();
+        }
+
+        // Z to select (Player 1)
+        if (Keyboard.current.zKey.wasPressedThisFrame)
+        {
+            SelectCurrentMenu(1);
+        }
+
+        // Player 2 uses Arrow Keys
+        if (Keyboard.current.upArrowKey.wasPressedThisFrame)
+        {
+            player2SelectedMenuIndex = (player2SelectedMenuIndex - 1 + currentMenuButtons.Count) % currentMenuButtons.Count;
+            UpdateMenuHighlight();
+        }
+
+        if (Keyboard.current.downArrowKey.wasPressedThisFrame)
+        {
+            player2SelectedMenuIndex = (player2SelectedMenuIndex + 1) % currentMenuButtons.Count;
+            UpdateMenuHighlight();
+        }
+
+        // M to select (Player 2)
+        if (Keyboard.current.mKey.wasPressedThisFrame)
+        {
+            SelectCurrentMenu(2);
+        }
+    }
+
+    private void UpdateMenuHighlight()
+    {
+        for (int i = 0; i < currentMenuButtons.Count; i++)
+        {
+            Image buttonImage = currentMenuButtons[i].GetComponent<Image>();
+            if (buttonImage != null)
+            {
+                // Show both players' selections (P1 in yellow, P2 in cyan)
+                if (i == player1SelectedMenuIndex)
+                {
+                    buttonImage.color = Color.yellow;
+                }
+                else if (i == player2SelectedMenuIndex)
+                {
+                    buttonImage.color = new Color(0, 1, 1); // Cyan
+                }
+                else
+                {
+                    buttonImage.color = Color.white;
+                }
+            }
+        }
+    }
+
+    private void SelectCurrentMenu(int playerNumber)
+    {
+        int selectedIndex = (playerNumber == 1) ? player1SelectedMenuIndex : player2SelectedMenuIndex;
+
+        if (selectedIndex >= 0 && selectedIndex < currentMenuActions.Count)
+        {
+            currentMenuActions[selectedIndex]?.Invoke();
+        }
+    }
+
+    private void SubscribeToGameEvents()
+    {
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.OnKeyCollected += UpdateKeyCountDisplay;
+            GameManager.Instance.OnNodeChanged += OnNodeChanged;
+        }
+    }
+
+    private void OnNodeChanged(NavigationNode node)
+    {
+        currentNode = node;
+        UpdateLocationDisplay();
+        UpdateMenuOptions();
+        UpdateKeyCountDisplay();
+    }
+
+    private void UpdateLocationDisplay()
+    {
+        if (currentLocationText != null)
+        {
+            currentLocationText.text = currentNode.NodeName;
+        }
+    }
+
+    private void UpdateKeyCountDisplay()
+    {
+        if (GameManager.Instance == null) return;
+
+        int totalKeys = GameManager.Instance.GetTotalKeysCollected();
+
+        if (keyCountText != null)
+        {
+            keyCountText.text = $"Keys Collected: {totalKeys}/4";
+        }
+    }
+
+    private void UpdateKeyCountDisplay(int keyNumber)
+    {
+        UpdateKeyCountDisplay();
+    }
+
+    private void UpdateMenuOptions()
+    {
+        ClearMenuButtons();
+
+        if (currentNode == null) return;
+
+        // Add navigation options (move to other rooms)
+        foreach (var connection in currentNode.Connections)
+        {
+            if (connection.destinationNode == null) continue;
+
+            string buttonLabel = $"> {connection.label}";
+            NavigationNode destination = connection.destinationNode;
+
+            CreateMenuButton(buttonLabel, () =>
+            {
+                if (destination.CanAccess())
+                {
+                    GameManager.Instance.NavigateToNode(destination);
+                }
+                else
+                {
+                    Debug.Log($"Cannot access {destination.NodeName} - insufficient keys");
+                }
+            });
+        }
+
+        // Reset both players' menu selections
+        player1SelectedMenuIndex = 0;
+        player2SelectedMenuIndex = 0;
+        if (currentMenuButtons.Count > 0)
+        {
+            UpdateMenuHighlight();
+        }
+    }
+
+    private void CreateMenuButton(string label, System.Action onClicked)
+    {
+        if (menuButtonPrefab == null)
+        {
+            Debug.LogWarning("Menu button prefab not assigned!");
+            return;
+        }
+
+        GameObject buttonObj = Instantiate(menuButtonPrefab, menuPanel);
         TextMeshProUGUI buttonText = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
 
         if (buttonText != null)
@@ -85,253 +227,48 @@ public class PlayerUIContext
         {
             button.onClick.AddListener(() =>
             {
-                if (targetNode.CanAccess())
-                {
-                    GameManager.Instance.NavigateToNode(targetNode);
-                }
-                else
-                {
-                    Debug.Log($"Cannot access {targetNode.NodeName} - insufficient keys");
-                }
+                onClicked?.Invoke();
             });
         }
 
-        navigationButtons.Add(buttonObj);
+        currentMenuButtons.Add(buttonObj);
+        currentMenuActions.Add(onClicked);
     }
 
-    public void HandleNavigationInput(float horizontal, float vertical)
+    private void ClearMenuButtons()
     {
-        if (currentConnections.Count == 0) return;
-
-        if (horizontal != 0)
+        foreach (GameObject button in currentMenuButtons)
         {
-            selectedConnectionIndex += (int)Mathf.Sign(horizontal);
-            selectedConnectionIndex = Mathf.Clamp(selectedConnectionIndex, 0, currentConnections.Count - 1);
-            UpdateNavigationHighlight();
+            Destroy(button);
         }
-        else if (vertical != 0)
-        {
-            selectedConnectionIndex += (int)Mathf.Sign(vertical);
-            selectedConnectionIndex = Mathf.Clamp(selectedConnectionIndex, 0, currentConnections.Count - 1);
-            UpdateNavigationHighlight();
-        }
-    }
-
-    public void SelectCurrentConnection()
-    {
-        if (selectedConnectionIndex >= 0 && selectedConnectionIndex < currentConnections.Count)
-        {
-            NavigationNode selectedNode = currentConnections[selectedConnectionIndex];
-            if (selectedNode.CanAccess())
-            {
-                GameManager.Instance.NavigateToNode(selectedNode);
-            }
-        }
-    }
-
-    private void UpdateNavigationHighlight()
-    {
-        for (int i = 0; i < navigationButtons.Count; i++)
-        {
-            Image buttonImage = navigationButtons[i].GetComponent<Image>();
-            if (buttonImage != null)
-            {
-                buttonImage.color = (i == selectedConnectionIndex) ? Color.yellow : Color.white;
-            }
-        }
-    }
-
-    private void ClearNavigationButtons()
-    {
-        foreach (GameObject button in navigationButtons)
-        {
-            Object.Destroy(button);
-        }
-        navigationButtons.Clear();
-    }
-
-    public void UpdateInteractionPrompt(string promptText)
-    {
-        if (interactionPrompt != null)
-            interactionPrompt.text = promptText;
-    }
-
-    public void ClearInteractionPrompt()
-    {
-        UpdateInteractionPrompt("");
-    }
-}
-
-/// <summary>
-/// Manages all UI elements for both players
-/// Displays prompts, key counters, and navigation options with directional controls
-/// </summary>
-public class GameUIManager : MonoBehaviour
-{
-    public static GameUIManager Instance { get; private set; }
-
-    [SerializeField] private PlayerUIContext player1UI = new PlayerUIContext();
-    [SerializeField] private PlayerUIContext player2UI = new PlayerUIContext();
-    [SerializeField] private GameObject navigationButtonPrefab;
-
-    // Input System references for navigation
-    private InputAction player1NavAction;
-    private InputAction player2NavAction;
-    private InputAction player1SelectAction;
-    private InputAction player2SelectAction;
-
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-
-        // Initialize player contexts
-        player1UI.playerNumber = 1;
-        player2UI.playerNumber = 2;
-    }
-
-    private void OnEnable()
-    {
-        SetupInputActions();
-    }
-
-    private void OnDisable()
-    {
-        TeardownInputActions();
-    }
-
-    private void Start()
-    {
-        SetupInitialUI();
-        SubscribeToGameEvents();
-    }
-
-    private void SetupInitialUI()
-    {
-        player1UI.Initialize();
-        player2UI.Initialize();
-        UpdateKeyCountDisplay();
-    }
-
-    private void SetupInputActions()
-    {
-        // Player 1 navigation
-        player1NavAction = new InputAction(type: InputActionType.Value, binding: "<Keyboard>/w,<Keyboard>/a,<Keyboard>/s,<Keyboard>/d");
-        player1NavAction.performed += _ => HandlePlayer1Navigation();
-        player1NavAction.Enable();
-
-        player1SelectAction = new InputAction(binding: "<Keyboard>/z");
-        player1SelectAction.performed += _ => player1UI.SelectCurrentConnection();
-        player1SelectAction.Enable();
-
-        // Player 2 navigation
-        player2NavAction = new InputAction(type: InputActionType.Value, binding: "<Keyboard>/upArrow,<Keyboard>/leftArrow,<Keyboard>/downArrow,<Keyboard>/rightArrow");
-        player2NavAction.performed += _ => HandlePlayer2Navigation();
-        player2NavAction.Enable();
-
-        player2SelectAction = new InputAction(binding: "<Keyboard>/m");
-        player2SelectAction.performed += _ => player2UI.SelectCurrentConnection();
-        player2SelectAction.Enable();
-    }
-
-    private void TeardownInputActions()
-    {
-        player1NavAction?.Disable();
-        player2NavAction?.Disable();
-        player1SelectAction?.Disable();
-        player2SelectAction?.Disable();
-    }
-
-    private void HandlePlayer1Navigation()
-    {
-        float horizontal = 0;
-        float vertical = 0;
-
-        if (Keyboard.current.wKey.isPressed) vertical += 1;
-        if (Keyboard.current.sKey.isPressed) vertical -= 1;
-        if (Keyboard.current.aKey.isPressed) horizontal -= 1;
-        if (Keyboard.current.dKey.isPressed) horizontal += 1;
-
-        player1UI.HandleNavigationInput(horizontal, vertical);
-    }
-
-    private void HandlePlayer2Navigation()
-    {
-        float horizontal = 0;
-        float vertical = 0;
-
-        if (Keyboard.current.upArrowKey.isPressed) vertical += 1;
-        if (Keyboard.current.downArrowKey.isPressed) vertical -= 1;
-        if (Keyboard.current.leftArrowKey.isPressed) horizontal -= 1;
-        if (Keyboard.current.rightArrowKey.isPressed) horizontal += 1;
-
-        player2UI.HandleNavigationInput(horizontal, vertical);
-    }
-
-    private void SubscribeToGameEvents()
-    {
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.OnKeyCollected += UpdateKeyCountDisplay;
-            GameManager.Instance.OnNodeChanged += OnNodeChanged;
-            GameManager.Instance.OnGameOver += OnGameOver;
-        }
-    }
-
-    private void UpdateKeyCountDisplay()
-    {
-        if (GameManager.Instance == null) return;
-
-        int totalKeys = GameManager.Instance.GetTotalKeysCollected();
-        player1UI.UpdateKeyCountDisplay(totalKeys);
-        player2UI.UpdateKeyCountDisplay(totalKeys);
-    }
-
-    private void UpdateKeyCountDisplay(int keyNumber)
-    {
-        UpdateKeyCountDisplay();
+        currentMenuButtons.Clear();
+        currentMenuActions.Clear();
     }
 
     public void UpdateInteractionPrompt(int playerNumber, string promptText)
     {
         if (playerNumber == 1)
-            player1UI.UpdateInteractionPrompt(promptText);
+        {
+            player1InteractionPrompt = promptText;
+        }
         else if (playerNumber == 2)
-            player2UI.UpdateInteractionPrompt(promptText);
+        {
+            player2InteractionPrompt = promptText;
+        }
+        Debug.Log($"Player {playerNumber} interaction: {promptText}");
     }
 
     public void ClearInteractionPrompt(int playerNumber)
     {
-        UpdateInteractionPrompt(playerNumber, "");
-    }
-
-    private void OnNodeChanged(NavigationNode node)
-    {
-        player1UI.UpdateNodeDisplay(node);
-        player2UI.UpdateNodeDisplay(node);
-        UpdateNavigationOptions(node);
-    }
-
-    private void UpdateNavigationOptions(NavigationNode node)
-    {
-        player1UI.UpdateNavigationOptions(node, navigationButtonPrefab);
-        player2UI.UpdateNavigationOptions(node, navigationButtonPrefab);
-    }
-
-    private void OnGameOver()
-    {
-        Debug.Log("Game Over - UI should display end screen");
-    }
-
-    public void DisplayMessage(string message, float duration = 3f)
-    {
-        Debug.Log($"Message: {message}");
+        if (playerNumber == 1)
+        {
+            player1InteractionPrompt = "";
+        }
+        else if (playerNumber == 2)
+        {
+            player2InteractionPrompt = "";
+        }
+        Debug.Log($"Player {playerNumber} interaction prompt cleared");
     }
 
     private void OnDestroy()
@@ -340,9 +277,6 @@ public class GameUIManager : MonoBehaviour
         {
             GameManager.Instance.OnKeyCollected -= UpdateKeyCountDisplay;
             GameManager.Instance.OnNodeChanged -= OnNodeChanged;
-            GameManager.Instance.OnGameOver -= OnGameOver;
         }
-
-        TeardownInputActions();
     }
 }

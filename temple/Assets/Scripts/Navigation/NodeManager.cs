@@ -42,9 +42,12 @@ public class NodeManager : MonoBehaviour
     {
         if (node == null) return;
 
+        // Skip intermediate nodes - they're only used for traversal animation
+        if (node.IsIntermediateNode) return;
+
         if (nodesRegistry.ContainsKey(node.NodeName))
         {
-            Debug.LogWarning($"Node '{node.NodeName}' already registered!");
+            Debug.LogWarning($"Node '{node.NodeName}' already registered! {node.gameObject.name}");
             return;
         }
 

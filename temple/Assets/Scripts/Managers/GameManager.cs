@@ -70,6 +70,29 @@ public class GameManager : MonoBehaviour
         demonEncountered = false;
     }
 
+    private void Start()
+    {
+        // Position both players at the starting node and initialize UI
+        if (startingNode != null)
+        {
+            // Directly position players without animation on startup
+            if (player1Transform != null)
+            {
+                player1Transform.position = startingNode.transform.position;
+            }
+            if (player2Transform != null)
+            {
+                player2Transform.position = startingNode.transform.position;
+            }
+
+            // Trigger node change event to initialize menu and UI
+            currentNode = startingNode;
+            currentNode.MarkAsVisited();
+            OnNodeChanged?.Invoke(currentNode);
+            Debug.Log($"Game started at: {startingNode.NodeName}");
+        }
+    }
+
     /// <summary>
     /// Collect a key and trigger associated events
     /// </summary>
