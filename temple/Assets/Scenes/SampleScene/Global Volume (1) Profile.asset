@@ -32,13 +32,13 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 8
   lightingClampMode:
-    m_OverrideState: 1
-    m_Value: 0
+    m_OverrideState: 0
+    m_Value: 2
   lightingClamp:
-    m_OverrideState: 1
-    m_Value: 1
+    m_OverrideState: 0
+    m_Value: 1.22
   lightingClampSharpness:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 0
 --- !u!114 &-8325869529694619631
 MonoBehaviour:

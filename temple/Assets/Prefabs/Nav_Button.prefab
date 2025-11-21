@@ -35,7 +35,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 20, y: 20}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5953425447911798089
 CanvasRenderer:
@@ -246,7 +246,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 20, y: 20}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &458521497347752416
 CanvasRenderer:
@@ -276,7 +276,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -389021130, guid: e1a6ae7c0c8de4daea7c3e4b1d081e6e, type: 3}
+  m_Sprite: {fileID: -316619730, guid: e1a6ae7c0c8de4daea7c3e4b1d081e6e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -298,6 +298,7 @@ GameObject:
   - component: {fileID: 6552363129145496184}
   - component: {fileID: 3457864795847592884}
   - component: {fileID: 4201418962404418346}
+  - component: {fileID: 712135021769130448}
   m_Layer: 5
   m_Name: Nav_Button
   m_TagString: Untagged
@@ -409,7 +410,35 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3457864795847592884}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &712135021769130448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1940999435847603178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adfcfef150c0f419ca4ba9d6716cce3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NavButton
+  here_icon: {fileID: 842411512098688441}
+  goto_icon: {fileID: 1633219824520048081}
+  locked_icon: {fileID: 3350550331259765949}
+  navigationNode: {fileID: 0}
 --- !u!1 &3350550331259765949
 GameObject:
   m_ObjectHideFlags: 0

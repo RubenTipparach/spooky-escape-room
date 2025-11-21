@@ -85,9 +85,8 @@ public class NavigationNode : MonoBehaviour
         if (!isLocked) return true;
 
         // Check if player has enough keys
-        // GameManager manager = GameManager.Instance;
-        // return manager != null && manager.GetTotalKeysCollected() >= keysRequired;
-        return false; // Placeholder until GameManager reference is added
+        GameManager manager = GameManager.Instance;
+        return manager != null && manager.GetTotalKeysCollected() >= keysRequired;
     }
 
     public void OpenDoorsOnTraversal()
@@ -109,8 +108,11 @@ public class NavigationNode : MonoBehaviour
         // Draw this node as a cube (larger for main nodes, smaller red for intermediate)
         if (isIntermediateNode)
         {
-            Gizmos.color = Color.red;
-            Gizmos.DrawCube(transform.position, Vector3.one * 0.5f);
+            if (ShouldDrawIntermediateNodes())
+            {
+                Gizmos.color = Color.red;
+                Gizmos.DrawCube(transform.position, Vector3.one * 0.5f);
+            }
         }
         else
         {
@@ -118,15 +120,21 @@ public class NavigationNode : MonoBehaviour
             Gizmos.DrawCube(transform.position, Vector3.one * 1f);
 
             // Draw label for non-intermediate nodes when selected
-            //UnityEditor.Handles.color = Color.white;
-            //UnityEditor.Handles.Label(transform.position + Vector3.up * 0.75f, nodeName);
+            if (ShouldDrawNodeLabels())
+            {
+                UnityEditor.Handles.color = Color.white;
+                UnityEditor.Handles.Label(transform.position + Vector3.up * 0.75f, nodeName);
+            }
         }
 
         // Draw connections to other nodes
-        Gizmos.color = Color.cyan;
-        foreach (var connection in connections)
+        if (ShouldDrawNavigationPaths())
         {
-            DrawConnectionPath(connection);
+            Gizmos.color = Color.cyan;
+            foreach (var connection in connections)
+            {
+                DrawConnectionPath(connection);
+            }
         }
     }
 
@@ -135,8 +143,11 @@ public class NavigationNode : MonoBehaviour
         // Draw node cube even when not selected (for better visibility in large scenes)
         if (isIntermediateNode)
         {
-            Gizmos.color = new Color(1, 0, 0, 0.3f); // Red, semi-transparent
-            Gizmos.DrawCube(transform.position, Vector3.one * 0.5f);
+            if (ShouldDrawIntermediateNodes())
+            {
+                Gizmos.color = new Color(1, 0, 0, 0.3f); // Red, semi-transparent
+                Gizmos.DrawCube(transform.position, Vector3.one * 0.5f);
+            }
         }
         else
         {
@@ -145,11 +156,29 @@ public class NavigationNode : MonoBehaviour
         }
 
         // Draw connections to other nodes
-        Gizmos.color = Color.cyan;
-        foreach (var connection in connections)
+        if (ShouldDrawNavigationPaths())
         {
-            DrawConnectionPath(connection);
+            Gizmos.color = Color.cyan;
+            foreach (var connection in connections)
+            {
+                DrawConnectionPath(connection);
+            }
         }
+    }
+
+    private bool ShouldDrawNavigationPaths()
+    {
+        return DebugVisualizationManager.Instance != null && DebugVisualizationManager.Instance.DrawNavigationPaths;
+    }
+
+    private bool ShouldDrawIntermediateNodes()
+    {
+        return DebugVisualizationManager.Instance != null && DebugVisualizationManager.Instance.DrawIntermediateNodes;
+    }
+
+    private bool ShouldDrawNodeLabels()
+    {
+        return DebugVisualizationManager.Instance != null && DebugVisualizationManager.Instance.DrawNodeLabels;
     }
 
     private void DrawConnectionPath(NodeConnection connection)

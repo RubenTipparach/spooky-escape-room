@@ -49,13 +49,17 @@
   <ItemGroup>
     <Compile Include="Assets/Scripts/Interaction/IInteractable.cs" />
     <Compile Include="Assets/Scripts/Navigation/NodeManager.cs" />
+    <Compile Include="Assets/Scripts/Managers/GameManager.cs" />
     <Compile Include="Assets/Scripts/Interaction/Door.cs" />
+    <Compile Include="Assets/Scripts/Managers/NewMonoBehaviourScript.cs" />
     <Compile Include="Assets/Scripts/Player/PlayerController.cs" />
     <Compile Include="Assets/Scripts/UI/NavButton.cs" />
     <Compile Include="Assets/Scripts/Navigation/NavigationNode.cs" />
     <Compile Include="Assets/Scripts/Navigation/NavigationHandler.cs" />
     <Compile Include="Assets/Scripts/Puzzles/Puzzle.cs" />
     <Compile Include="Assets/Scripts/Interaction/InteractableObject.cs" />
+    <Compile Include="Assets/Scripts/Managers/DebugVisualizationManager.cs" />
+    <Compile Include="Assets/Scripts/UI/UIManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />
@@ -77,6 +81,7 @@
     <None Include="Assets/TextMesh Pro/Resources/LineBreaking Leading Characters.txt" />
     <None Include="Assets/TextMesh Pro/Shaders/TMPro_Properties.cginc" />
     <None Include="Assets/TextMesh Pro/Shaders/TMPro_Surface.cginc" />
+    <None Include="Assets/Art/Models/Simple_Character_PSX/README.txt" />
     <None Include="Assets/TextMesh Pro/Resources/LineBreaking Following Characters.txt" />
     <None Include="Assets/Art/Textures/SBS - Photorealistic Texture Pack 1 - 256x256/License.txt" />
     <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile Masking.shader" />
@@ -85,6 +90,7 @@
     <None Include="Assets/Art/Textures/SBS - Tiny Texture Pack - 256x256/License.txt" />
     <None Include="Assets/Art/Textures/SBS - Photorealistic Texture Pack 3 - 256x256/License.txt" />
     <None Include="Assets/TextMesh Pro/Fonts/LiberationSans - OFL.txt" />
+    <None Include="Assets/Art/Models/PSXFurniture/_README.txt" />
     <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile.shader" />
     <None Include="Assets/TextMesh Pro/Shaders/TMP_Sprite.shader" />
   </ItemGroup>
@@ -1289,12 +1295,12 @@
       <HintPath>Library/ScriptAssemblies/Unity.ShaderGraph.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.RenderPipelines.Core.Editor.Shared">
-      <HintPath>Library/ScriptAssemblies/Unity.RenderPipelines.Core.Editor.Shared.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.2D.Sprite.AIIntegration.Editor">
       <HintPath>Library/ScriptAssemblies/Unity.2D.Sprite.AIIntegration.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Editor.Shared">
+      <HintPath>Library/ScriptAssemblies/Unity.RenderPipelines.Core.Editor.Shared.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.InputSystem">
