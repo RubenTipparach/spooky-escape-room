@@ -23,8 +23,9 @@ public class TVController : MonoBehaviour
     private int currentChannel = 0;
     private bool isChangingChannel = false;
     private bool jumpScareTriggered = false;
+    public NavigationNode assoociatedNode;
     private const int MAX_CHANNEL = 17;
-    private const float BLACKOUT_DURATION = 2f;
+    private const float BLACKOUT_DURATION = 1f;
     private const int JUMP_SCARE_CHANNEL = 17;
     private const float JUMP_SCARE_LOCK_DURATION = 3f;
 
@@ -79,8 +80,22 @@ public class TVController : MonoBehaviour
         if (currentChannel == JUMP_SCARE_CHANNEL && !jumpScareTriggered)
         {
             jumpScareTriggered = true;
+
+            // Hide blackout before showing jump scare
+            blackoutImage.gameObject.SetActive(false);
+            staticImage.gameObject.SetActive(false);
+
             ShowJumpScare();
+
             yield return new WaitForSeconds(JUMP_SCARE_LOCK_DURATION);
+
+            // Show blackout again before switching away from jump scare
+            if (blackoutImage != null)
+            {
+                blackoutImage.gameObject.SetActive(true);
+            }
+
+            yield return new WaitForSeconds(BLACKOUT_DURATION);
         }
 
         // Update display
@@ -139,11 +154,10 @@ public class TVController : MonoBehaviour
     private void ShowJumpScare()
     {
         // Show jump scare image on channel display
-        if (jumpScareSprite != null && channelDisplay != null)
-        {
-            channelDisplay.sprite = jumpScareSprite;
-            channelDisplay.gameObject.SetActive(true);
-        }
+        channelDisplay.sprite = jumpScareSprite;
+        channelDisplay.gameObject.SetActive(true);
+        //TODO play jump scare sound effect
+        Debug.Log("Jump Scare Triggered!");
     }
 
     private void UpdateChannelDisplay()
@@ -153,4 +167,5 @@ public class TVController : MonoBehaviour
             channelNumberText.text = currentChannel.ToString("D2");
         }
     }
+
 }

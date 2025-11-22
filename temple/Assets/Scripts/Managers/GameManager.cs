@@ -80,4 +80,10 @@ public class GameManager : MonoBehaviour
        playerController.SetCurrentgNode(navigationNode);
        uiManager.UpdateNavButtons();
     }
+
+    public void UnlockNode(NavigationNode bedroom2UnlockedNode)
+    {
+        bedroom2UnlockedNode.Unlock();
+        uiManager.UpdateNavButtonsWithoutFacingChange();
+    }
 }

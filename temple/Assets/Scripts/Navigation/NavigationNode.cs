@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 /// <summary>
 /// Represents a connection to another node, optionally with intermediate nodes for traversal animation
@@ -39,7 +40,6 @@ public class NavigationNode : MonoBehaviour
     // Intermediate nodes for traversal animation
     [SerializeField] private bool isIntermediateNode = false;
     [SerializeField] private List<InteractableObject> doorsToOpen = new List<InteractableObject>();
-    [SerializeField] private bool isLivingRoom = false;
 
     private bool hasBeenVisited = false;
 
@@ -57,8 +57,6 @@ public class NavigationNode : MonoBehaviour
     public bool HasBeenVisited => hasBeenVisited;
     public bool IsIntermediateNode => isIntermediateNode;
     public List<InteractableObject> DoorsToOpen => doorsToOpen;
-    public bool IsLivingRoom => isLivingRoom;
-
     public FacingDirection FacingDirection;
     
 
@@ -105,6 +103,11 @@ public class NavigationNode : MonoBehaviour
                 Debug.Log($"Door opened on traversal through {nodeName}");
             }
         }
+    }
+
+    public void Unlock()
+    {
+        isLocked = false;
     }
 
 #if UNITY_EDITOR
@@ -208,6 +211,8 @@ public class NavigationNode : MonoBehaviour
         // Draw final line to destination
         Gizmos.DrawLine(currentPosition, connection.destinationNode.transform.position);
     }
+
+
 #endif
 }
 

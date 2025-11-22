@@ -32,6 +32,7 @@ public class UIManager : MonoBehaviour
     public void SetDoorUnlockedMessage(string doorName)
     {
         doorUnlockedMessage.ShowMessage(doorName);
+
     }
 
     void Awake()
@@ -67,6 +68,7 @@ public class UIManager : MonoBehaviour
 
         curerentNavButton.ChangeDirectionLocal(localFacing, currentNavFacing);
         UpdateTVVisibility(localFacing);
+        CheckActivatePuzzle();
     }
 
     public void UpdateNavButtons()
@@ -90,18 +92,40 @@ public class UIManager : MonoBehaviour
             }
 
         }
+        gameManager.playerController.localFacingDirection = LocalFacingDirection.Forward;
         UpdateTVVisibility(gameManager.playerController.localFacingDirection);
+        CheckActivatePuzzle();
+    }
+
+    public void UpdateNavButtonsWithoutFacingChange()
+    {
+        foreach (NavButton button in navButtons)
+        {
+            if (button.navigationNode == gameManager.playerController.currentNode)
+            {
+                button.SetCurrentButtonState(NavState.Here, true);
+                curerentNavButton = button;
+            }
+            else if (!button.navigationNode.IsLocked)
+            {
+                button.SetCurrentButtonState(NavState.GoTo);
+            }
+            else
+            {
+                button.SetCurrentButtonState(NavState.Locked);
+            }
+
+        }
+        //UpdateTVVisibility(gameManager.playerController.localFacingDirection);
+        CheckActivatePuzzle();
     }
 
     private void UpdateTVVisibility(LocalFacingDirection localFacingDirection)
     {
-        if (tvController != null && gameManager.playerController.currentNode != null)
-        {
-            bool isLivingRoom = gameManager.playerController.currentNode.IsLivingRoom;
-            bool isFacingForward = localFacingDirection == LocalFacingDirection.Forward;
+        bool isLivingRoom =gameManager.playerController.currentNode == tvController.assoociatedNode;  
+        bool isFacingForward = localFacingDirection == LocalFacingDirection.Forward;
 
-            tvController.gameObject.SetActive(isLivingRoom && isFacingForward);
-        }
+        tvController.gameObject.SetActive(isLivingRoom && isFacingForward);
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -114,5 +138,14 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+
+    private void CheckActivatePuzzle()
+    {
+        foreach (Puzzle puzzle in GameManager.Instance.uiManager.puzzles)
+        {
+            puzzle.CheckActivatePuzzle();
+        }
     }
 }

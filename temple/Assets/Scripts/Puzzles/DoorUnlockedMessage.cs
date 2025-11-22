@@ -7,26 +7,21 @@ public class DoorUnlockedMessage : MonoBehaviour
 {
 
     public TextMeshProUGUI messageText;
-    private const float MESSAGE_DURATION = 10f;
+    public float MESSAGE_DURATION = 5f;
 
-    internal void ShowMessage(string doorName)
+    public void ShowMessage(string doorName)
     {
+        gameObject.SetActive(true);
+        Debug.Log($"Showing door unlocked message for {doorName}");
         StartCoroutine(DisplayMessageRoutine(doorName));
     }
 
     private IEnumerator DisplayMessageRoutine(string doorName)
     {
-        if (messageText != null)
-        {
-            messageText.text = $"{doorName} Unlocked";
-            messageText.gameObject.SetActive(true);
-        }
+        messageText.text = $"{doorName} Unlocked!";
 
         yield return new WaitForSeconds(MESSAGE_DURATION);
 
-        if (messageText != null)
-        {
-            messageText.gameObject.SetActive(false);
-        }
+        gameObject.SetActive(false);
     }
 }

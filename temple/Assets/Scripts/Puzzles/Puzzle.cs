@@ -15,6 +15,10 @@ public abstract class Puzzle : MonoBehaviour
     public string PuzzleName => puzzleName;
     public bool IsSolved => isSolved;
 
+    public NavigationNode associatedNode;
+
+    public LocalFacingDirection associatedDirection;
+
     public virtual void Initialize()
     {
         isSolved = false;
@@ -26,10 +30,29 @@ public abstract class Puzzle : MonoBehaviour
 
         isSolved = true;
         OnPuzzleSolved?.Invoke();
+        gameObject.SetActive(false);
     }
 
     public virtual void ResetPuzzle()
     {
         isSolved = false;
+    }
+
+    public void CheckActivatePuzzle()
+    {
+        GameManager gameManager = GameManager.Instance;
+
+        NavigationNode playerNode = gameManager.playerController.currentNode;
+
+        if (playerNode == associatedNode 
+            && gameManager.playerController.localFacingDirection == associatedDirection
+            && !isSolved)
+        {
+            gameObject.SetActive(true);
+        }
+        else{
+            gameObject.SetActive(false);
+        }
+
     }
 }

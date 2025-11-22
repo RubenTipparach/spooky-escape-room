@@ -11,7 +11,7 @@ public class NavButton : MonoBehaviour
     public NavigationNode navigationNode;
     public NavState navState;
 
-    public void SetCurrentButtonState(NavState state)
+    public void SetCurrentButtonState(NavState state ,bool changeDirection = true)
     {
         navState = state;
  
@@ -21,7 +21,10 @@ public class NavButton : MonoBehaviour
                 here_icon.SetActive(true);
                 goto_icon.SetActive(false);
                 locked_icon.SetActive(false);
-                ChangeDirection();
+                if (changeDirection)
+                {
+                    ChangeDirection();
+                }
                 break;
             case NavState.GoTo:
                 here_icon.SetActive(false);
@@ -50,8 +53,11 @@ public class NavButton : MonoBehaviour
 
     public void ChangeDirection()
     {
+
         if(navState == NavState.Here)
         {
+            Debug.Log("Changing Direction of Here Icon");
+
             switch(GameManager.Instance.playerController.FacingDirection)
             {
                 case FacingDirection.North:
@@ -74,6 +80,8 @@ public class NavButton : MonoBehaviour
     {
         if(navState == NavState.Here)
         {
+            Debug.Log("Changing Direction of Local");
+
             float rotationAngle = GetLocalRotationAngle(localFacingDirection, currentFacingDirection);
             here_icon.transform.rotation = Quaternion.Euler(0, 0, rotationAngle);
         }
