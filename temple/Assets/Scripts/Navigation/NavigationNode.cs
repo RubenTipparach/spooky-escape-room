@@ -39,6 +39,7 @@ public class NavigationNode : MonoBehaviour
     // Intermediate nodes for traversal animation
     [SerializeField] private bool isIntermediateNode = false;
     [SerializeField] private List<InteractableObject> doorsToOpen = new List<InteractableObject>();
+    [SerializeField] private bool isLivingRoom = false;
 
     private bool hasBeenVisited = false;
 
@@ -56,6 +57,7 @@ public class NavigationNode : MonoBehaviour
     public bool HasBeenVisited => hasBeenVisited;
     public bool IsIntermediateNode => isIntermediateNode;
     public List<InteractableObject> DoorsToOpen => doorsToOpen;
+    public bool IsLivingRoom => isLivingRoom;
 
     public FacingDirection FacingDirection;
     

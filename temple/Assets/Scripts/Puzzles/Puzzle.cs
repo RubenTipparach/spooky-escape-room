@@ -7,29 +7,17 @@ using System;
 public abstract class Puzzle : MonoBehaviour
 {
     [SerializeField] protected string puzzleName = "Puzzle";
-    [SerializeField] protected int keyReward = 0;
 
     protected bool isSolved = false;
-    protected int attemptCount = 0;
 
-    public event Action<int> OnPuzzleSolved; // Called with key reward amount
-    public event Action OnPuzzleAttempt;
+    public event Action OnPuzzleSolved; // Called with key reward amount
 
     public string PuzzleName => puzzleName;
     public bool IsSolved => isSolved;
-    public int AttemptCount => attemptCount;
-    public int KeyReward => keyReward;
 
     public virtual void Initialize()
     {
         isSolved = false;
-        attemptCount = 0;
-    }
-
-    public virtual void AttemptPuzzle()
-    {
-        attemptCount++;
-        OnPuzzleAttempt?.Invoke();
     }
 
     public virtual void SolvePuzzle()
@@ -37,13 +25,11 @@ public abstract class Puzzle : MonoBehaviour
         if (isSolved) return;
 
         isSolved = true;
-        Debug.Log($"Puzzle '{puzzleName}' solved! Reward: Key {keyReward}");
-        OnPuzzleSolved?.Invoke(keyReward);
+        OnPuzzleSolved?.Invoke();
     }
 
     public virtual void ResetPuzzle()
     {
         isSolved = false;
-        attemptCount = 0;
     }
 }

@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
         {
             keysCollected[i] = false;
         }
-
+        playerController.transform.rotation = Quaternion.Euler(0, 0, 0);
         playerController.SetCurrentgNode(startingNode);
     }
 

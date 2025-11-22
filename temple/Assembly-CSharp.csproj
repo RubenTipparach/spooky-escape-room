@@ -48,13 +48,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets/Scripts/Interaction/IInteractable.cs" />
+    <Compile Include="Assets/Scripts/Puzzles/PianoPuzzle.cs" />
+    <Compile Include="Assets/Scripts/Puzzles/DoorUnlockedMessage.cs" />
     <Compile Include="Assets/Scripts/Navigation/NodeManager.cs" />
     <Compile Include="Assets/Scripts/Managers/GameManager.cs" />
+    <Compile Include="Assets/Scripts/Puzzles/KeysPuzzle.cs" />
+    <Compile Include="Assets/Scripts/Puzzles/TVController.cs" />
     <Compile Include="Assets/Scripts/Interaction/Door.cs" />
+    <Compile Include="Assets/Scripts/Puzzles/TemplePuzzle.cs" />
     <Compile Include="Assets/Scripts/Managers/NewMonoBehaviourScript.cs" />
     <Compile Include="Assets/Scripts/Player/PlayerController.cs" />
     <Compile Include="Assets/Scripts/UI/NavButton.cs" />
+    <Compile Include="Assets/Scripts/Puzzles/PicturePuzzle.cs" />
     <Compile Include="Assets/Scripts/Navigation/NavigationNode.cs" />
+    <Compile Include="Assets/Scripts/Puzzles/LeverPuzzle.cs" />
     <Compile Include="Assets/Scripts/UI/SwapScreenButton.cs" />
     <Compile Include="Assets/Scripts/Navigation/NavigationHandler.cs" />
     <Compile Include="Assets/Scripts/Puzzles/Puzzle.cs" />

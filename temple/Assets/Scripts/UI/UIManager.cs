@@ -16,17 +16,48 @@ public class UIManager : MonoBehaviour
     public RawImage mainScreen;
     public RawImage forwardScreen;
 
+    public DoorUnlockedMessage doorUnlockedMessage;
+
     // public SwapScreenButton swapScreenButtonForward;
     // public SwapScreenButton swapScreenButtonLeft;
     // public SwapScreenButton swapScreenButtonRight;
     // public SwapScreenButton swapScreenButtonBack;
 
+    public TVController tvController;
+
+    public List<Puzzle> puzzles;
+
     public NavButton curerentNavButton;
+
+    public void SetDoorUnlockedMessage(string doorName)
+    {
+        doorUnlockedMessage.ShowMessage(doorName);
+    }
 
     void Awake()
     {
         gameManager = GameManager.Instance;
        UpdateNavButtons();
+
+       foreach (Puzzle puzzle in puzzles)
+       {
+           puzzle.gameObject.SetActive(false);
+       }
+    }
+
+    public void ActivatePuzzle(Puzzle actiivePuzzle)
+    {
+        foreach (Puzzle puzzle in puzzles)
+        {
+            if (puzzle == actiivePuzzle && !puzzle.IsSolved)
+            {
+                puzzle.gameObject.SetActive(true);
+            }
+            else 
+            {
+                puzzle.gameObject.SetActive(false);
+            }
+        }
     }
 
     public void SwapScreen(SwapScreenButton swapButton)
@@ -35,6 +66,7 @@ public class UIManager : MonoBehaviour
         var localFacing = swapButton.localFacingDirection;
 
         curerentNavButton.ChangeDirectionLocal(localFacing, currentNavFacing);
+        UpdateTVVisibility(localFacing);
     }
 
     public void UpdateNavButtons()
@@ -57,6 +89,18 @@ public class UIManager : MonoBehaviour
                 button.SetCurrentButtonState(NavState.Locked);
             }
 
+        }
+        UpdateTVVisibility(gameManager.playerController.localFacingDirection);
+    }
+
+    private void UpdateTVVisibility(LocalFacingDirection localFacingDirection)
+    {
+        if (tvController != null && gameManager.playerController.currentNode != null)
+        {
+            bool isLivingRoom = gameManager.playerController.currentNode.IsLivingRoom;
+            bool isFacingForward = localFacingDirection == LocalFacingDirection.Forward;
+
+            tvController.gameObject.SetActive(isLivingRoom && isFacingForward);
         }
     }
 
