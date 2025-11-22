@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 /// <summary>
 /// Simple player representation
@@ -8,10 +9,32 @@ public class PlayerController : MonoBehaviour
 {
     public NavigationNode currentNode;
 
-    public void SetStartingNode(NavigationNode startingNode)
+    public FacingDirection FacingDirection { get; internal set; }
+
+    public LocalFacingDirection localFacingDirection;
+
+    public void SetCurrentgNode(NavigationNode navigationNode)
     {
-        currentNode = startingNode;
-        transform.position = startingNode.transform.position;
+        currentNode = navigationNode;
+        transform.position = navigationNode.transform.position;
+        FacingDirection = navigationNode.FacingDirection;
+        
+        switch(navigationNode.FacingDirection)
+            {
+                case FacingDirection.North:
+                    transform.rotation = Quaternion.Euler(0, 0, 0);
+                    break;
+                case FacingDirection.East:
+                    transform.rotation = Quaternion.Euler(0, 90, 0);
+                    break;
+                case FacingDirection.South: 
+                    transform.rotation = Quaternion.Euler(0, 180, 0);
+                    break;
+                case FacingDirection.West:
+                    transform.rotation = Quaternion.Euler(0, -90, 0);
+                    break;
+            }
+
         // TODO activate current puzzles.
     }
 }

@@ -57,6 +57,9 @@ public class NavigationNode : MonoBehaviour
     public bool IsIntermediateNode => isIntermediateNode;
     public List<InteractableObject> DoorsToOpen => doorsToOpen;
 
+    public FacingDirection FacingDirection;
+    
+
     public void MarkAsVisited()
     {
         hasBeenVisited = true;
@@ -204,4 +207,12 @@ public class NavigationNode : MonoBehaviour
         Gizmos.DrawLine(currentPosition, connection.destinationNode.transform.position);
     }
 #endif
+}
+
+public enum FacingDirection
+{
+    North,
+    East,
+    South,
+    West
 }

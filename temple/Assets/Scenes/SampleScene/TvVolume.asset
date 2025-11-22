@@ -79,7 +79,7 @@ MonoBehaviour:
     m_Value: 0.042
   framebufferDither:
     m_OverrideState: 1
-    m_Value: 0.867
+    m_Value: 1
   ditherSize:
     m_OverrideState: 1
     m_Value: 1
@@ -299,7 +299,7 @@ MonoBehaviour:
   active: 1
   isEnabled:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0
   fogFalloffMode:
     m_OverrideState: 1
     m_Value: 1
@@ -308,7 +308,7 @@ MonoBehaviour:
     m_Value: 0
   color:
     m_OverrideState: 1
-    m_Value: {r: 0.2924528, g: 0.2924528, b: 0.2924528, a: 1}
+    m_Value: {r: 0, g: 0, b: 0, a: 1}
   precisionAlpha:
     m_OverrideState: 1
     m_Value: 0.439
@@ -477,7 +477,7 @@ MonoBehaviour:
     m_Value: 1
   bloom:
     m_OverrideState: 1
-    m_Value: 0.314
+    m_Value: 0.464
   grateMaskMode:
     m_OverrideState: 1
     m_Value: 2

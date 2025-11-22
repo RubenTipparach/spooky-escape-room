@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
 
     public NavigationNode startingNode;
 
+    public UIManager uiManager;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -36,7 +38,7 @@ public class GameManager : MonoBehaviour
             keysCollected[i] = false;
         }
 
-        playerController.SetStartingNode(startingNode);
+        playerController.SetCurrentgNode(startingNode);
     }
 
     public void CollectKey(int keyNumber)
@@ -75,6 +77,7 @@ public class GameManager : MonoBehaviour
 
     public void TraverseToNode(NavigationNode navigationNode)
     {
-        throw new NotImplementedException();
+       playerController.SetCurrentgNode(navigationNode);
+       uiManager.UpdateNavButtons();
     }
 }

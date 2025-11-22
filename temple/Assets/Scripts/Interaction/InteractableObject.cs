@@ -42,7 +42,6 @@ public abstract class InteractableObject : MonoBehaviour, IInteractable
             return;
         }
 
-        Debug.Log($"Player {player.PlayerNumber} interacted with {objectName}");
     }
 
     public virtual void OnSecondaryInteract(PlayerController player)
@@ -52,8 +51,6 @@ public abstract class InteractableObject : MonoBehaviour, IInteractable
             Debug.Log($"{objectName}: Cannot perform secondary interaction right now");
             return;
         }
-
-        Debug.Log($"Player {player.PlayerNumber} secondary interacted with {objectName}");
     }
 
     public virtual string GetInteractionPrompt()

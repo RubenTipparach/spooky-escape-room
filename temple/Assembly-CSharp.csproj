@@ -55,10 +55,10 @@
     <Compile Include="Assets/Scripts/Player/PlayerController.cs" />
     <Compile Include="Assets/Scripts/UI/NavButton.cs" />
     <Compile Include="Assets/Scripts/Navigation/NavigationNode.cs" />
+    <Compile Include="Assets/Scripts/UI/SwapScreenButton.cs" />
     <Compile Include="Assets/Scripts/Navigation/NavigationHandler.cs" />
     <Compile Include="Assets/Scripts/Puzzles/Puzzle.cs" />
     <Compile Include="Assets/Scripts/Interaction/InteractableObject.cs" />
-    <Compile Include="Assets/Scripts/UI/ScreenSwitcher.cs" />
     <Compile Include="Assets/Scripts/Managers/DebugVisualizationManager.cs" />
     <Compile Include="Assets/Scripts/UI/UIManager.cs" />
   </ItemGroup>
