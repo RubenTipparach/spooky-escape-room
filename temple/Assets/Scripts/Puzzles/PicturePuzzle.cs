@@ -16,13 +16,40 @@ public class PicturePuzzle : Puzzle
     private int selectedIndex = -1;
     private bool isAnimating = false;
     private Coroutine currentSwapCoroutine = null;
+    private Dictionary<Paintings, Vector3> paintingStartPositions = new Dictionary<Paintings, Vector3>();
 
     public List<Button> paintingButtons;
 
     public NavigationNode unlockedNode;
+
     void Start()
     {
         InitializePaintings();
+    }
+
+    void OnDisable()
+    {
+        // Clean up animation if the puzzle is disabled while animating
+        if (isAnimating && currentSwapCoroutine != null)
+        {
+            StopCoroutine(currentSwapCoroutine);
+
+            // Restore paintings to their intended positions
+            foreach (var kvp in paintingStartPositions)
+            {
+                if (kvp.Key != null)
+                {
+                    kvp.Key.transform.position = kvp.Value;
+                }
+            }
+            paintingStartPositions.Clear();
+
+            isAnimating = false;
+        }
+
+        // Reset selection and UI state
+        DeselectPainting();
+        ShowAllPaintingButtons();
     }
 
     private void InitializePaintings()
@@ -84,6 +111,13 @@ public class PicturePuzzle : Puzzle
         {
             StopCoroutine(currentSwapCoroutine);
         }
+
+        // Store start positions before animation
+        Paintings firstPainting = paintings[firstIndex];
+        Paintings secondPainting = paintings[secondIndex];
+        paintingStartPositions[firstPainting] = firstPainting.transform.position;
+        paintingStartPositions[secondPainting] = secondPainting.transform.position;
+
         GameManager.Instance.audioManager.PlayPaintingSound();
         currentSwapCoroutine = StartCoroutine(SwapAnimationRoutine(firstIndex, secondIndex));
     }

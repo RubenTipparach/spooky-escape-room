@@ -36,6 +36,23 @@ public class TVController : MonoBehaviour
         UpdateChannelDisplay();
     }
 
+    void OnDisable()
+    {
+        // Clean up animation state if TV is disabled mid-animation
+        isChangingChannel = false;
+
+        // Hide all UI elements to reset visual state
+        ClearAllChannels();
+        if (blackoutImage != null)
+        {
+            blackoutImage.gameObject.SetActive(false);
+        }
+
+        // Reset channel to 0
+        currentChannel = 0;
+        UpdateChannelDisplay();
+    }
+
     public void ChannelUp()
     {
         if (!isChangingChannel)

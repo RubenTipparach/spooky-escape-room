@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public UIManager uiManager;
 
     public NavigationNode special_TEMPLE_Node;
+    public NavigationNode basementNode;
 
     public PlayableDirector basementCutsceneDirector;
 
@@ -33,6 +34,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject corpse;
     public AudioManager audioManager;
+
 
     public void TurnOnHud()
     {

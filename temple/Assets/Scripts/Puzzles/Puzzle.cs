@@ -29,7 +29,7 @@ public abstract class Puzzle : MonoBehaviour
         if (isSolved) return;
 
         isSolved = true;
-        GameManager.Instance.audioManager.PlayDingDongClockSound();
+        //GameManager.Instance.audioManager.PlayDingDongClockSound();
         OnPuzzleSolved?.Invoke();
         gameObject.SetActive(false);
     }

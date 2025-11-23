@@ -44,7 +44,7 @@ public class AudioManager : MonoBehaviour
         float pitchValue = 0.1f + pitch / 12f * 0.9f;
         audioSource.pitch = pitchValue;
         audioSource.PlayOneShot(pianoKey);
-        audioSource.pitch = 1f; // Reset pitch to normal
+        //audioSource.pitch = 1f; // Reset pitch to normal
     }
 
     private void Start()
@@ -54,13 +54,14 @@ public class AudioManager : MonoBehaviour
 
     private IEnumerator RandomDoorbellRoutine()
     {
-        // Wait 3-4 minutes before doorbell
-        float initialDelay = Random.Range(180, 250f);
+        // Wait 2-3 minutes before doorbell
+        float initialDelay = Random.Range(120, 180);
+        Debug.LogWarning($"Doorbell will ring in {initialDelay} seconds ({initialDelay / 60f:F1} minutes)");
         yield return new WaitForSeconds(initialDelay);
-
+        Debug.LogWarning("Doorbell ringing now!");
         // Play doorbell once if player is not in Yard AND Basement is still locked
         if (GameManager.Instance.playerController.currentNode.NodeName != "Yard"
-            && GameManager.Instance.special_TEMPLE_Node.IsLocked)
+            && GameManager.Instance.basementNode.IsLocked)
         {
             PlayDoorbell();
         }
