@@ -13,6 +13,10 @@ public class PlayerController : MonoBehaviour
 
     public LocalFacingDirection localFacingDirection;
 
+    public Transform playerMover;
+
+    bool movePlayer = false;
+
     public void SetCurrentgNode(NavigationNode navigationNode)
     {
         currentNode = navigationNode;
@@ -36,5 +40,25 @@ public class PlayerController : MonoBehaviour
             }
 
         // TODO activate current puzzles.
+    }
+
+    public void StartPlayerMover()
+    {
+        movePlayer = true;
+    }
+
+
+    public void EndPlayerMover()
+    {
+        movePlayer = false;
+    }
+
+    void Update()
+    {
+        if(movePlayer)
+        {
+            transform.position = playerMover.position;
+        }
+        
     }
 }

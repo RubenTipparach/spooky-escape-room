@@ -6,6 +6,8 @@ public class Key : MonoBehaviour
     public NavigationNode associatedNode;
     public LocalFacingDirection associatedDirection;
 
+    public bool keyObtained = false;
+
     public void CheckShowKey()
     {
         GameManager gameManager = GameManager.Instance;
@@ -13,7 +15,8 @@ public class Key : MonoBehaviour
         NavigationNode playerNode = gameManager.playerController.currentNode;
 
         if (playerNode == associatedNode
-            && gameManager.playerController.localFacingDirection == associatedDirection)
+            && gameManager.playerController.localFacingDirection == associatedDirection
+            && !keyObtained)
         {
             gameObject.SetActive(true);
         }
@@ -26,8 +29,8 @@ public class Key : MonoBehaviour
     public void PickupKey()
     {
         // Add key to inventory UI
-        GameManager.Instance.uiManager.keyInventoryUI.AddKeyUI(keyId);
-
+        GameManager.Instance.uiManager.keyInventoryUI.AddKeyUI();
+        keyObtained = true;
         // Disable the key gameobject
         gameObject.SetActive(false);
     }

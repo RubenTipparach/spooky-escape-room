@@ -8,8 +8,10 @@ public class PicturePuzzle : Puzzle
     public Paintings[] paintings;
     public int[] correctPaintingOrder = { 4, 2, 1, 3 };
     public Color selectedColor = Color.yellow;
+    public Color originalColor = Color.white;
+
     public float swapAnimationDuration = 0.5f;
-    public float swapVerticalDistance = 1f;
+    public float swapVerticalDistance = .8f;
 
     private int selectedIndex = -1;
     private bool isAnimating = false;
@@ -213,7 +215,7 @@ public class PicturePuzzle : Puzzle
             Button button = paintingButtons[paintingIndex];
             Image buttonImage = button.GetComponent<Image>();
 
-            buttonImage.color = Color.white;
+            buttonImage.color = originalColor;
             Debug.Log($"Painting {paintingIndex} deselected");
         }
     }

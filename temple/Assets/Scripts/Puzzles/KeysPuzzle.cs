@@ -4,12 +4,10 @@ using UnityEngine;
 public class KeysPuzzle : Puzzle
 {
     public List<GameObject> keyHoleSlots; //3d models
-    //public List<Key> keys; // UI components
     public int keysNeededToSolve = 3;
     public NavigationNode unlockedNode;
 
-    private List<int> usedKeyIds = new List<int>();
-    private int keysAdded = 0;
+    private int keysInsertedCount = 0;
 
     void Start()
     {
@@ -28,40 +26,36 @@ public class KeysPuzzle : Puzzle
         }
     }
 
-    public void AddKey(int keyId)
+    public void CheckKeyInventory()
     {
         if (isSolved)
             return;
+        var keyInventoryUI = GameManager.Instance.uiManager.keyInventoryUI;
+        int keysObtained = keyInventoryUI.GetKeysObtained();
 
-        // Check if this key has already been used
-        if (usedKeyIds.Contains(keyId))
+        Debug.Log($"CheckKeyInventory: keysObtained={keysObtained}, keysInsertedCount={keysInsertedCount}");
+
+        if (keysObtained == 0 && keysInsertedCount == 0)
         {
-            Debug.Log($"Key {keyId} has already been used!");
-            return;
+            Debug.Log("No keys in inventory");
+            var uiManager = GameManager.Instance.uiManager;
+            uiManager.SetMessage("No keys in your inventory.");
         }
-
-        // Deactivate the key from the UI list
-        // if (keyId >= 0 && keyId < keys.Count && keys[keyId] != null)
-        // {
-        //     keys[keyId].gameObject.SetActive(false);
-        // }
-
-        // Activate the corresponding keyhole slot
-        if (keyId >= 0 && keyId < keyHoleSlots.Count && keyHoleSlots[keyId] != null)
+        else if (keysObtained > 0 && keysInsertedCount < keysNeededToSolve)
         {
-            keyHoleSlots[keyId].SetActive(true);
+            // Insert the next key into the puzzle
+            int keyIndex = keysInsertedCount;
+            if (keyIndex < keyHoleSlots.Count && keyHoleSlots[keyIndex] != null)
+            {
+                keyHoleSlots[keyIndex].SetActive(true);
+                keyInventoryUI.RemoveKeyUI();
+                keysInsertedCount++;
+                Debug.Log($"Key added to puzzle! Total: {keysInsertedCount}/{keysNeededToSolve}");
+            }
         }
-
-        usedKeyIds.Add(keyId);
-        keysAdded++;
-
-        Debug.Log($"Key {keyId} added. Keys added: {keysAdded}/{keysNeededToSolve}");
-
-        // Call UIManager to remove key from inventory
-        GameManager.Instance.uiManager.keyInventoryUI.RemoveKeyUI(keyId);
 
         // Check if puzzle is solved
-        if (keysAdded >= keysNeededToSolve)
+        if (keysInsertedCount >= keysNeededToSolve)
         {
             SolvePuzzleCheck();
         }

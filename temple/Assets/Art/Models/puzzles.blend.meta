@@ -7,6 +7,16 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Stone
+    second: {fileID: 2100000, guid: 6aad48d59a1d841d1aa5684afe60e865, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: gold
+    second: {fileID: 2100000, guid: 4471f6dbf54f3462d954b18b1d3e4008, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: metal
     second: {fileID: 2100000, guid: 57c5890bd129f47e09b1a2f348e2a47b, type: 2}
   - first:
@@ -14,6 +24,21 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: painting
     second: {fileID: 2100000, guid: 2de00b19471954ff4a4bb02560ce7fef, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: painting_2
+    second: {fileID: 2100000, guid: 857de62771b464df6ac860594133f236, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: stone_3
+    second: {fileID: 2100000, guid: 7cb376d764050407393470ba5df6356e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: stone_dark
+    second: {fileID: 2100000, guid: 19a3f5f8bbbe44890bcfc66fbc778642, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

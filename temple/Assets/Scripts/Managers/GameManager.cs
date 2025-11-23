@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using UnityEngine.Playables;
 
 /// <summary>
 /// Central game manager handling game state and key collection
@@ -20,6 +21,32 @@ public class GameManager : MonoBehaviour
     public NavigationNode startingNode;
 
     public UIManager uiManager;
+
+    public NavigationNode special_TEMPLE_Node;
+
+
+    public PlayableDirector basementCutsceneDirector;
+
+    private bool basementCutscenePlayed = false;
+
+    public void TurnOnHud()
+    {
+        uiManager.playerUI.SetActive(true);
+        // also map player to special node.
+        // and enable temple nav button
+        playerController.SetCurrentgNode(special_TEMPLE_Node);
+        uiManager.secret_TEMPLE_NavButton.gameObject.SetActive(true);
+        uiManager.navigationPanel.SetActive(false);
+        playerController.EndPlayerMover();
+    }
+
+    public void TurnOffHud()
+    {
+        uiManager.playerUI.SetActive(false);
+        playerController.StartPlayerMover();
+
+    }
+
 
     private void Awake()
     {
@@ -79,6 +106,13 @@ public class GameManager : MonoBehaviour
     {
        playerController.SetCurrentgNode(navigationNode);
        uiManager.UpdateNavButtons();
+
+       // Play basement cutscene on first entry
+       if (navigationNode.NodeName == "Basement" && !basementCutscenePlayed && basementCutsceneDirector != null)
+       {
+           basementCutsceneDirector.Play();
+           basementCutscenePlayed = true;
+       }
     }
 
     public void UnlockNode(NavigationNode bedroom2UnlockedNode)

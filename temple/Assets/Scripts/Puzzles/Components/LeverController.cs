@@ -17,6 +17,7 @@ public class LeverController : MonoBehaviour
 
     private LeverState currentState = LeverState.Up;
     private bool isAnimating = false;
+    private Coroutine currentAnimation = null;
 
     void Start()
     {
@@ -26,11 +27,21 @@ public class LeverController : MonoBehaviour
         }
     }
 
+    void OnDisable()
+    {
+        // Clean up animation if the gameobject is disabled
+        if (isAnimating && currentAnimation != null)
+        {
+            StopCoroutine(currentAnimation);
+            isAnimating = false;
+        }
+    }
+
     public void PullLeverDown()
     {
         if (currentState == LeverState.Up && !isAnimating)
         {
-            StartCoroutine(AnimateLever(upAngle, downAngle, LeverState.Down));
+            currentAnimation = StartCoroutine(AnimateLever(upAngle, downAngle, LeverState.Down));
         }
     }
 
@@ -38,7 +49,7 @@ public class LeverController : MonoBehaviour
     {
         if (currentState == LeverState.Down && !isAnimating)
         {
-            StartCoroutine(AnimateLever(downAngle, upAngle, LeverState.Up));
+            currentAnimation = StartCoroutine(AnimateLever(downAngle, upAngle, LeverState.Up));
         }
     }
 
@@ -57,6 +68,7 @@ public class LeverController : MonoBehaviour
     private IEnumerator AnimateLever(float fromAngle, float toAngle, LeverState newState)
     {
         isAnimating = true;
+        currentState = newState;
         float elapsedTime = 0f;
 
         while (elapsedTime < animationDuration)
@@ -78,8 +90,8 @@ public class LeverController : MonoBehaviour
             leverHandle.transform.localRotation = Quaternion.Euler(0, toAngle, 0);
         }
 
-        currentState = newState;
         isAnimating = false;
+        currentAnimation = null;
     }
 
     public LeverState GetCurrentState()

@@ -2,32 +2,41 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System;
 
 public class DoorUnlockedMessage : MonoBehaviour
 {
     public TextMeshProUGUI messageText;
     public float MESSAGE_DURATION = 5f;
     public CanvasGroup canvasGroup;
-    public float fadeInDuration = 0.3f;
+    public float fadeInDuration = 0.2f;
     public float fadeOutDuration = 0.5f;
 
-    public void ShowMessage(string doorName)
+    public void ShowDoorMessage(string doorName)
     {
         gameObject.SetActive(true);
         Debug.Log($"Showing door unlocked message for {doorName}");
-        StartCoroutine(DisplayMessageRoutine(doorName));
+        StartCoroutine(DisplayMessageRoutine($"{doorName} Unlocked!"));
     }
 
-    private IEnumerator DisplayMessageRoutine(string doorName)
+    internal void ShowGenericMessage(string message)
     {
-        messageText.text = $"{doorName} Unlocked!";
+        gameObject.SetActive(true);
+        Debug.Log($"Showing generic message: {message}");
+        StartCoroutine(DisplayMessageRoutine(message));
+    }
+
+    private IEnumerator DisplayMessageRoutine(string message, 
+        float messageDuration = 3f)
+    {
+        messageText.text = message;
         canvasGroup.alpha = 0f;
 
         // Fade in
         yield return StartCoroutine(FadeCanvasGroup(0f, 1f, fadeInDuration));
 
         // Stay visible
-        yield return new WaitForSeconds(MESSAGE_DURATION - fadeInDuration - fadeOutDuration);
+        yield return new WaitForSeconds(messageDuration - fadeInDuration - fadeOutDuration);
 
         // Fade out
         yield return StartCoroutine(FadeCanvasGroup(1f, 0f, fadeOutDuration));

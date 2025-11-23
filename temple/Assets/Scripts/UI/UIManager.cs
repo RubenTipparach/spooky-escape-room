@@ -41,11 +41,20 @@ public class UIManager : MonoBehaviour
 
     public KeyInventoryUI keyInventoryUI;
 
+    public NavButton secret_TEMPLE_NavButton;
+
+    public GameObject playerUI;
+
     public void SetDoorUnlockedMessage(string doorName)
     {
-        doorUnlockedMessage.ShowMessage(doorName);
-
+        doorUnlockedMessage.ShowDoorMessage(doorName);
     }
+
+    public void SetMessage(string message)
+    {
+        doorUnlockedMessage.ShowGenericMessage(message);
+    }
+
 
     void Awake()
     {

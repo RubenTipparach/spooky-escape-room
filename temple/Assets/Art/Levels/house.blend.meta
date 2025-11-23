@@ -57,6 +57,16 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: marble
+    second: {fileID: 2100000, guid: 7daa4eede1d724b96b60c4739f54b292, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: marble_2
+    second: {fileID: 2100000, guid: ad2af8f194a2941c9b448adfa4388afd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: plaster
     second: {fileID: 2100000, guid: 39f2aced9dc8f4c4b82c3d2445a37b4f, type: 2}
   - first:

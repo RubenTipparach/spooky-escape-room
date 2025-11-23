@@ -5,18 +5,32 @@ using UnityEngine;
 public class KeyInventoryUI : MonoBehaviour
 {
     public List<GameObject> keyUIElements;
-    private int keysObtained = 0;
+    public int keysObtained = 0;
 
-    public void RemoveKeyUI(int keyId)
+    public void RemoveKeyUI()
     {
-        keyUIElements[keyId].SetActive(false);
-        keysObtained--;
+        if (keysObtained > 0)
+        {
+            keysObtained--;
+        }
+        UpdateKeyDisplay();
     }
 
-    public void AddKeyUI(int keyId)
+    public void AddKeyUI()
     {
-        keyUIElements[keyId].SetActive(true);
-        keysObtained++;
+        if (keysObtained < keyUIElements.Count)
+        {
+            keysObtained++;
+        }
+        UpdateKeyDisplay();
+    }
+
+    private void UpdateKeyDisplay()
+    {
+        for (int i = 0; i < keyUIElements.Count; i++)
+        {
+            keyUIElements[i].SetActive(i < keysObtained);
+        }
     }
 
     public int GetKeysObtained()
