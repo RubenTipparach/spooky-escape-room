@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour
         playerController.SetCurrentgNode(special_TEMPLE_Node);
         uiManager.secret_TEMPLE_NavButton.gameObject.SetActive(true);
         uiManager.navigationPanel.SetActive(false);
+
+        uiManager.CheckActivatePuzzle();
         playerController.EndPlayerMover();
     }
 
@@ -119,5 +121,10 @@ public class GameManager : MonoBehaviour
     {
         bedroom2UnlockedNode.Unlock();
         uiManager.UpdateNavButtonsWithoutFacingChange();
+    }
+
+    internal void PlayFinalCutscene()
+    {
+        throw new NotImplementedException();
     }
 }

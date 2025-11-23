@@ -171,7 +171,7 @@ public class UIManager : MonoBehaviour
     }
 
 
-    private void CheckActivatePuzzle()
+    public void CheckActivatePuzzle()
     {
         foreach (Puzzle puzzle in GameManager.Instance.uiManager.puzzles)
         {
