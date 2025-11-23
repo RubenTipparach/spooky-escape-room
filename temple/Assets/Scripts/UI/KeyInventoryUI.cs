@@ -12,6 +12,7 @@ public class KeyInventoryUI : MonoBehaviour
         if (keysObtained > 0)
         {
             keysObtained--;
+            GameManager.Instance.audioManager.PlayKeyPickupSound();
         }
         UpdateKeyDisplay();
     }
@@ -21,6 +22,7 @@ public class KeyInventoryUI : MonoBehaviour
         if (keysObtained < keyUIElements.Count)
         {
             keysObtained++;
+            GameManager.Instance.audioManager.PlayKeyPickupSound();
         }
         UpdateKeyDisplay();
     }

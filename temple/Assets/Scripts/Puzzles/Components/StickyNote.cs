@@ -25,9 +25,10 @@ public class StickyNote : MonoBehaviour
         }
     }
 
-    public void OnClickStickyNote  ()
+    public void OnClickStickyNote()
     {
         UIManager uiManager = GameManager.Instance.uiManager;
+        GameManager.Instance.audioManager.PlayPaperSound();
         uiManager.OpoenStickyNote(noteText);
     }
 }

@@ -72,5 +72,7 @@ public class KeysPuzzle : Puzzle
         GameManager.Instance.UnlockNode(unlockedNode);
         GameManager.Instance.uiManager.SetDoorUnlockedMessage("Basement");
         SolvePuzzle();
+        GameManager.Instance.corpse.SetActive(false);
+
     }
 }

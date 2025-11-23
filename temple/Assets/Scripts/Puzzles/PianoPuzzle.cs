@@ -23,6 +23,9 @@ public class PianoPuzzle : Puzzle
         // Add note to buffer
         noteBuffer.Add(noteIndex);
 
+        // Play piano key sound with pitch based on note index
+        GameManager.Instance.audioManager.PlayPianoKey(noteIndex);
+
         // Debug log with timestamp
         Debug.Log($"[{System.DateTime.Now:HH:mm:ss.fff}] Note played: {noteIndex} | Buffer: {string.Join(", ", noteBuffer)}");
 

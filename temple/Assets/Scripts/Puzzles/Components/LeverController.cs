@@ -41,6 +41,7 @@ public class LeverController : MonoBehaviour
     {
         if (currentState == LeverState.Up && !isAnimating)
         {
+            GameManager.Instance.audioManager.PlayLeverPullSound();
             currentAnimation = StartCoroutine(AnimateLever(upAngle, downAngle, LeverState.Down));
         }
     }
@@ -49,6 +50,7 @@ public class LeverController : MonoBehaviour
     {
         if (currentState == LeverState.Down && !isAnimating)
         {
+            GameManager.Instance.audioManager.PlayLeverPullSound();
             currentAnimation = StartCoroutine(AnimateLever(downAngle, upAngle, LeverState.Up));
         }
     }

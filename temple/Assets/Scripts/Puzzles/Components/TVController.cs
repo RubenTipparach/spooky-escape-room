@@ -156,7 +156,7 @@ public class TVController : MonoBehaviour
         // Show jump scare image on channel display
         channelDisplay.sprite = jumpScareSprite;
         channelDisplay.gameObject.SetActive(true);
-        //TODO play jump scare sound effect
+        GameManager.Instance.audioManager.PlayScream1();
         Debug.Log("Jump Scare Triggered!");
     }
 

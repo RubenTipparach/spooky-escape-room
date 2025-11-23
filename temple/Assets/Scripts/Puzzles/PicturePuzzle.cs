@@ -84,6 +84,7 @@ public class PicturePuzzle : Puzzle
         {
             StopCoroutine(currentSwapCoroutine);
         }
+        GameManager.Instance.audioManager.PlayPaintingSound();
         currentSwapCoroutine = StartCoroutine(SwapAnimationRoutine(firstIndex, secondIndex));
     }
 

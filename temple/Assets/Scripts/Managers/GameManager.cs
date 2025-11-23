@@ -29,8 +29,10 @@ public class GameManager : MonoBehaviour
     public PlayableDirector TempleCutsceneDirector;
 
     private bool basementCutscenePlayed = false;
+    private bool bedroom2ScreamPlayed = false;
 
     public GameObject corpse;
+    public AudioManager audioManager;
 
     public void TurnOnHud()
     {
@@ -43,7 +45,6 @@ public class GameManager : MonoBehaviour
 
         uiManager.CheckActivatePuzzle();
         playerController.EndPlayerMover();
-        corpse.SetActive(false);
     }
 
     public void TurnOffHud()
@@ -72,6 +73,9 @@ public class GameManager : MonoBehaviour
         }
         playerController.transform.rotation = Quaternion.Euler(0, 0, 0);
         playerController.SetCurrentgNode(startingNode);
+
+        // Start random doorbell sounds
+        //audioManager?.StartRandomDoorbell();
     }
 
     public void CollectKey(int keyNumber)
@@ -118,6 +122,13 @@ public class GameManager : MonoBehaviour
        {
            basementCutsceneDirector.Play();
            basementCutscenePlayed = true;
+       }
+
+       // Play scream on first entry to Bedroom 2
+       if (navigationNode.NodeName == "Bedroom 2" && !bedroom2ScreamPlayed)
+       {
+           audioManager.PlayScream2();
+           bedroom2ScreamPlayed = true;
        }
     }
 

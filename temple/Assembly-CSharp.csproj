@@ -47,6 +47,7 @@
     <Analyzer Include="/Applications/Unity/Hub/Editor/6000.2.12f1/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets/Scripts/Managers/AudioManager.cs" />
     <Compile Include="Assets/Scripts/Interaction/IInteractable.cs" />
     <Compile Include="Assets/Scripts/Puzzles/PianoPuzzle.cs" />
     <Compile Include="Assets/Scripts/Puzzles/DoorUnlockedMessage.cs" />

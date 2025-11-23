@@ -46,6 +46,7 @@ public class TemplePuzzle : Puzzle
         stonePressed[stoneId] = true;
         pressedSequence.Add(stoneId);
         AnimateStoneDown(stoneId);
+        GameManager.Instance.audioManager.PlayStoneButtonPressedSound();
         Debug.Log($"Stone {stoneId} pressed. Sequence: {string.Join(", ", pressedSequence)}");
 
         // Check if we've pressed 4 stones
