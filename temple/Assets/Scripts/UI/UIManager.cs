@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,7 +29,17 @@ public class UIManager : MonoBehaviour
 
     public List<Puzzle> puzzles;
 
+    public List<StickyNote> stickyNotes;
+
+    public List<Key> keys;
+
     public NavButton curerentNavButton;
+
+    public GameObject navigationPanel;
+
+    public LargeStickyNoteViewer largeStickyNoteViewer;
+
+    public KeyInventoryUI keyInventoryUI;
 
     public void SetDoorUnlockedMessage(string doorName)
     {
@@ -38,12 +50,22 @@ public class UIManager : MonoBehaviour
     void Awake()
     {
         gameManager = GameManager.Instance;
-       UpdateNavButtons();
+        UpdateNavButtons();
 
-       foreach (Puzzle puzzle in puzzles)
-       {
-           puzzle.gameObject.SetActive(false);
-       }
+        foreach (Puzzle puzzle in puzzles)
+        {
+            puzzle.gameObject.SetActive(false);
+        }
+
+    }
+    
+    void Start()
+    {
+
+        stickyNotes = FindObjectsByType<StickyNote>(FindObjectsInactive.Include, FindObjectsSortMode.None).ToList();
+        keys = FindObjectsByType<Key>(FindObjectsInactive.Include, FindObjectsSortMode.None).ToList();
+        CheckShowStickyNotes();
+        CheckShowKeys();
     }
 
     public void ActivatePuzzle(Puzzle actiivePuzzle)
@@ -69,11 +91,12 @@ public class UIManager : MonoBehaviour
         curerentNavButton.ChangeDirectionLocal(localFacing, currentNavFacing);
         UpdateTVVisibility(localFacing);
         CheckActivatePuzzle();
+        largeStickyNoteViewer.CloseStickyNote();
     }
 
     public void UpdateNavButtons()
     {
-
+        navigationPanel.SetActive(false);
         mainScreen.texture = forwardScreen.texture;
         foreach (NavButton button in navButtons)
         {
@@ -95,6 +118,7 @@ public class UIManager : MonoBehaviour
         gameManager.playerController.localFacingDirection = LocalFacingDirection.Forward;
         UpdateTVVisibility(gameManager.playerController.localFacingDirection);
         CheckActivatePuzzle();
+        largeStickyNoteViewer.CloseStickyNote();
     }
 
     public void UpdateNavButtonsWithoutFacingChange()
@@ -118,6 +142,7 @@ public class UIManager : MonoBehaviour
         }
         //UpdateTVVisibility(gameManager.playerController.localFacingDirection);
         CheckActivatePuzzle();
+        largeStickyNoteViewer.CloseStickyNote();
     }
 
     private void UpdateTVVisibility(LocalFacingDirection localFacingDirection)
@@ -128,11 +153,7 @@ public class UIManager : MonoBehaviour
         tvController.gameObject.SetActive(isLivingRoom && isFacingForward);
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+
 
     // Update is called once per frame
     void Update()
@@ -147,5 +168,28 @@ public class UIManager : MonoBehaviour
         {
             puzzle.CheckActivatePuzzle();
         }
+        CheckShowStickyNotes();
+        CheckShowKeys();
+    }
+
+    private void CheckShowStickyNotes()
+    {
+        foreach (StickyNote stickyNote in stickyNotes)
+        {
+            stickyNote.CheckShowStickyNote();
+        }
+    }
+
+    private void CheckShowKeys()
+    {
+        foreach (Key key in keys)
+        {
+            key.CheckShowKey();
+        }
+    }
+
+    public void OpoenStickyNote(string noteText)
+    {
+        largeStickyNoteViewer.OpoenStickyNote(noteText);
     }
 }
