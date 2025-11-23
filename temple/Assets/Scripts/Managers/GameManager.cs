@@ -24,10 +24,13 @@ public class GameManager : MonoBehaviour
 
     public NavigationNode special_TEMPLE_Node;
 
-
     public PlayableDirector basementCutsceneDirector;
 
+    public PlayableDirector TempleCutsceneDirector;
+
     private bool basementCutscenePlayed = false;
+
+    public GameObject corpse;
 
     public void TurnOnHud()
     {
@@ -40,6 +43,7 @@ public class GameManager : MonoBehaviour
 
         uiManager.CheckActivatePuzzle();
         playerController.EndPlayerMover();
+        corpse.SetActive(false);
     }
 
     public void TurnOffHud()
@@ -125,6 +129,10 @@ public class GameManager : MonoBehaviour
 
     internal void PlayFinalCutscene()
     {
-        throw new NotImplementedException();
+        TempleCutsceneDirector.Play();
+        uiManager.playerUI.SetActive(false);
+        playerController.playerMover = playerController.playerMover2;
+        playerController.StartPlayerMover();
     }
+
 }

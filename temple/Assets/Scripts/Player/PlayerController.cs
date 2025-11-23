@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     public LocalFacingDirection localFacingDirection;
 
     public Transform playerMover;
+    public Transform playerMover2;
 
     bool movePlayer = false;
 
