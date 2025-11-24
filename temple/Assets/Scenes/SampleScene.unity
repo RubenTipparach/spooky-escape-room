@@ -2198,9 +2198,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6093917829404650402, guid: 0696fa46f5b1d401a825b3280cd61e18, type: 3}
       propertyPath: noteText
-      value: 'Growing up, my parents likes to watch lots of TV. But they never really
+      value: 'Growing up, my parents liked to watch lots of TV. But they never really
         watched anything in particular. Seemed like they just stared blankly at the
-        static. They were also terrible at paino.
+        static. They were also terrible at piano.
 
 
         - C.'

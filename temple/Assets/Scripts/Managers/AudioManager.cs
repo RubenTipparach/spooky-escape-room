@@ -26,7 +26,13 @@ public class AudioManager : MonoBehaviour
     public AudioSource audioSource;
 
     public void PlayScream1() => audioSource.PlayOneShot(scream1);
-    public void PlayScream2() => audioSource.PlayOneShot(scream2);
+    public void PlayScream2()
+    {
+        float originalVolume = audioSource.volume;
+        audioSource.volume = 0.5f;
+        audioSource.PlayOneShot(scream2);
+        audioSource.volume = originalVolume;
+    }
     public void PlayKeyPickupSound() => audioSource.PlayOneShot(keyPickupSound);
     public void PlayPaintingSound() => audioSource.PlayOneShot(paintingSound);
     public void PlayDingDongClockSound() => audioSource.PlayOneShot(dingDongClockSound);
@@ -49,6 +55,8 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
+        // Set volume to 50%
+        //audioSource.volume = 0.5f;
         StartCoroutine(RandomDoorbellRoutine());
     }
 
