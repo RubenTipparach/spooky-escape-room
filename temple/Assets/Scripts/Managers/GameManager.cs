@@ -116,22 +116,22 @@ public class GameManager : MonoBehaviour
 
     public void TraverseToNode(NavigationNode navigationNode)
     {
-       playerController.SetCurrentgNode(navigationNode);
-       uiManager.UpdateNavButtons();
+        playerController.SetCurrentgNode(navigationNode);
+        uiManager.UpdateNavButtons();
 
-       // Play basement cutscene on first entry
-       if (navigationNode.NodeName == "Basement" && !basementCutscenePlayed && basementCutsceneDirector != null)
-       {
-           basementCutsceneDirector.Play();
-           basementCutscenePlayed = true;
-       }
+        // Play basement cutscene on first entry
+        if (navigationNode.NodeName == "Basement" && !basementCutscenePlayed && basementCutsceneDirector != null)
+        {
+            basementCutsceneDirector.Play();
+            basementCutscenePlayed = true;
+        }
 
-       // Play scream on first entry to Bedroom 2
-       if (navigationNode.NodeName == "Bedroom 2" && !bedroom2ScreamPlayed)
-       {
-           audioManager.PlayScream2();
-           bedroom2ScreamPlayed = true;
-       }
+        // Play scream on first entry to Bedroom 2
+        if (navigationNode.NodeName == "Bedroom 2" && !bedroom2ScreamPlayed)
+        {
+            audioManager.PlayScream2();
+            bedroom2ScreamPlayed = true;
+        }
     }
 
     public void UnlockNode(NavigationNode bedroom2UnlockedNode)
@@ -146,6 +146,11 @@ public class GameManager : MonoBehaviour
         uiManager.playerUI.SetActive(false);
         playerController.playerMover = playerController.playerMover2;
         playerController.StartPlayerMover();
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 
 }
